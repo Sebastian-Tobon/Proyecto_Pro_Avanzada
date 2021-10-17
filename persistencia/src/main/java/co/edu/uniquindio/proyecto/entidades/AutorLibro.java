@@ -2,11 +2,11 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Setter
@@ -14,19 +14,14 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @ToString
-public class AutorLibro implements Serializable {
+public class AutorLibro extends Persona implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    private Integer codigo;
-
-    private String nombre;
+    @Positive
+    @Max(9999)
+    @Column(nullable = false,  precision= 4)
     private Integer anioNacimiento;
 
-    public AutorLibro(String nombre, Integer anioNacimiento) {
-        this.nombre = nombre;
-        this.anioNacimiento = anioNacimiento;
-    }
+    @ManyToMany(mappedBy = "autores")
+    private List<Libro> libros;
 
 }

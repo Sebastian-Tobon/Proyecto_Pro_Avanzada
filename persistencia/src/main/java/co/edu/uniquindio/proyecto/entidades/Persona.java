@@ -1,35 +1,34 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Map;
+import java.time.LocalDate;
 
-@Entity
-@Setter
 @Getter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Setter
 @NoArgsConstructor
-@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public class Persona implements Serializable {
 
     @Id
+    @Column(length = 10)
     @EqualsAndHashCode.Include
-    private String  cedula;
-    private String nombre;
-    private String email;
+    private String codigo;
 
-    @ElementCollection
-    private Map<String, String> numTelefono;
+    @Column(nullable = false, length = 100)
+    private String nombre;
+
+    @Column(nullable = false)
+    private LocalDate fechaNacimiento;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private GeneroPerdona genero;
-
-    public Persona(String cedula, String nombre, String email) {
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.email = email;
-        this.numTelefono = numTelefono;
-    }
 }
