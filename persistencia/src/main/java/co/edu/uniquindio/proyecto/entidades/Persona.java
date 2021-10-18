@@ -3,8 +3,6 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 @Getter
@@ -20,7 +18,7 @@ public class Persona implements Serializable {
     @Id
     @Column(length = 10)
     @EqualsAndHashCode.Include
-    private String codigo;
+    private Integer codigo;
 
     @Column(nullable = false, length = 100)
     private String nombre;
@@ -30,5 +28,5 @@ public class Persona implements Serializable {
 
     @Column(nullable = false, length = 30)
     private String password;
-    
+
 }

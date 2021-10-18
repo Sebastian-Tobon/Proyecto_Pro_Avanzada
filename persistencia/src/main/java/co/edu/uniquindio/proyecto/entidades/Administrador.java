@@ -1,4 +1,21 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-public class Administrador {
+import lombok.*;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
+public class Administrador extends Persona implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    private Integer codigo;
+
 }
