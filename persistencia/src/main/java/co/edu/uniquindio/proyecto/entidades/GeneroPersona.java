@@ -1,5 +1,5 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-public enum GeneroPerdona {
+public enum GeneroPersona {
     MASCULINO, FEMENINO, OTRO
 }

@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
+@ToString(callSuper = true)
 public class Ciudad implements Serializable {
 
     @Id
@@ -22,10 +23,11 @@ public class Ciudad implements Serializable {
     private String nombre;
 
     @OneToMany(mappedBy = "ciudad")
+    @ToString.Exclude
     private List<Usuario> usuarios;
 
-    public Ciudad(Integer codigo, String nombre) {
-        this.codigo = codigo;
+    public Ciudad( String nombre){
         this.nombre = nombre;
     }
+
 }

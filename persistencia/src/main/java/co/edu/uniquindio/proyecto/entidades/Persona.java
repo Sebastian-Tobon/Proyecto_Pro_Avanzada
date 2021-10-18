@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +12,8 @@ import java.time.LocalDate;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @MappedSuperclass
+@AllArgsConstructor
+@ToString
 public class Persona implements Serializable {
 
     @Id
@@ -30,5 +29,7 @@ public class Persona implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private GeneroPerdona genero;
+    private GeneroPersona genero;
+
+
 }
