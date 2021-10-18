@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class Subasta {
 
     @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     @Id
     private Integer codigo;
 

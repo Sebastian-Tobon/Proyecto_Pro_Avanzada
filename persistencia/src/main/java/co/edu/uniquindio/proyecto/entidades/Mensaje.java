@@ -17,7 +17,7 @@ public class Mensaje {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer codigo;
-
+ 
     @Column(nullable = false)
     private String mensaje;
 

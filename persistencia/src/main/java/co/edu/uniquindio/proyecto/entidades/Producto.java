@@ -18,7 +18,7 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private Integer codigo;
+    private Integer codigo; 
 
     @Column(length = 100, nullable = false)
     private String nombre;
