@@ -27,6 +27,9 @@ public class Mensaje {
     @Column(nullable = false)
     private LocalDateTime fecha;
 
+    @ManyToOne
+    private Chat chat;
+
     public Mensaje(String mensaje, String emisor, LocalDateTime fecha) {
         this.mensaje = mensaje;
         this.emisor = emisor;

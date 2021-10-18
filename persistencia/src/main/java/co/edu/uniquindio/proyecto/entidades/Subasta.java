@@ -23,6 +23,9 @@ public class Subasta {
     @Future
     private LocalDateTime fecha_limite;
 
+    @ManyToOne
+    private Producto producto;
+
     public Subasta(LocalDateTime fecha_limite) {
         this.fecha_limite = fecha_limite;
     }

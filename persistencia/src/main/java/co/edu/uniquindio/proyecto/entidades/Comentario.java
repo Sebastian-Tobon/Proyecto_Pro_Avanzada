@@ -36,4 +36,10 @@ public class Comentario implements Serializable {
     @Column(nullable = false)
     private Float calificacion;
 
+    @ManyToOne
+    private Producto producto;
+
+    @ManyToOne
+    private Usuario usuario;
+
 }
