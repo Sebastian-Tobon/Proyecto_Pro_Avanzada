@@ -3,8 +3,9 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
-import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -24,8 +25,10 @@ public class Persona implements Serializable {
     @Column(nullable = false, length = 100)
     private String nombre;
 
-    @Column(nullable = false)
-    private LocalDate fechaNacimiento;
+    @Column(nullable = false, unique = true, length = 120)
+    private String email;
 
-
+    @Column(nullable = false, length = 30)
+    private String password;
+    
 }
