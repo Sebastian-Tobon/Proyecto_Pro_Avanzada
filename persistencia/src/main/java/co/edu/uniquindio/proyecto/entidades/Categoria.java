@@ -1,4 +1,4 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-public class Usuario {
+public class Categoria {
 }

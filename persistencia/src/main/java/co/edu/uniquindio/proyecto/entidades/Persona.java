@@ -27,9 +27,5 @@ public class Persona implements Serializable {
     @Column(nullable = false)
     private LocalDate fechaNacimiento;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private GeneroPersona genero;
-
 
 }
