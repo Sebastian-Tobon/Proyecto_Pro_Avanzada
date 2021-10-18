@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 
 @Entity
@@ -24,6 +25,7 @@ public class DetalleCompra implements Serializable {
     private Integer codigoProducto;
 
     @Column(nullable = false)
+    @Positive
     private Integer unidades;
 
     @Column(nullable = false)
