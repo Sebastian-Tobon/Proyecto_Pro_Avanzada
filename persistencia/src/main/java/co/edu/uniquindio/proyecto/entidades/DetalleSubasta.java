@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -25,6 +26,7 @@ public class DetalleSubasta implements Serializable {
     private Integer codigoUsuario;
 
     @Column(nullable = false)
+    @Positive
     private Integer valor;
 
     @Column(nullable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
