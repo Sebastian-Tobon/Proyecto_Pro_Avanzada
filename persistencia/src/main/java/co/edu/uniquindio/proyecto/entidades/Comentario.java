@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -25,15 +25,17 @@ public class Comentario implements Serializable {
     private String respuesta;
 
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDate fechaComentario;
+    private LocalDateTime fechaComentario;
 
     @Column(nullable = false)
     private Float calificacion;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Producto producto;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Usuario usuario;
 
 }

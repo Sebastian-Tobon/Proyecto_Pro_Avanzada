@@ -13,7 +13,7 @@ import java.util.Map;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @ToString
-public class Usuario implements Serializable {
+public class Usuario extends Persona implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,8 +35,8 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "usuario")
     private List<Producto> listaProductos;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<DetalleSubasta> listaDetalleSubasta;
+    @ManyToMany(mappedBy = "usuarios")
+    private List<Producto> productos;
 
     @ElementCollection
     @Column(nullable = false)

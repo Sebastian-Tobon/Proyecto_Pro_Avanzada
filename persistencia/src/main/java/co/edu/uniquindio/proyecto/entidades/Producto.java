@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Positive;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,7 @@ import java.util.Map;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @ToString
-public class Producto {
+public class Producto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +42,7 @@ public class Producto {
     private LocalDateTime fecha_limite;
 
     @OneToMany(mappedBy = "producto")
-    private List<Comentario> listaDepartamentos;
+    private List<Comentario> listaComentarios;
 
     @ElementCollection
     @Column(nullable = false)
@@ -57,10 +58,13 @@ public class Producto {
     private List<Subasta> listaSubastas;
 
     @OneToMany(mappedBy = "producto")
-    private List<Comentario> listaComentarios;
-
-    @OneToMany(mappedBy = "producto")
     private List<DetalleCompra> listaDetallesCompra;
+
+    @ManyToMany(mappedBy = "productos")
+    private List<Categoria> categorias;
+
+    @ManyToMany
+    private List<Usuario> usuarios;
 
     public Producto(String nombre, Integer unidades, String descripcion, Integer precio, LocalDateTime fecha_limite) {
         this.nombre = nombre;
