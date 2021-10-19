@@ -54,9 +54,11 @@ public class CategoriaTest {
     @Sql("classpath:categorias.sql")
     public void eliminarCategoriaTest(){
 
+        //Elimino la categoria "104"
         categoriaRepo.deleteById(104);
 
-        Categoria catBuscado = categoriaRepo.findById(1004).orElse(null);
+        //Busco la categoria eliminada
+        Categoria catBuscado = categoriaRepo.findById(104).orElse(null);
 
         Assertions.assertNull(catBuscado);
         System.out.println("Categoria Eliminada");

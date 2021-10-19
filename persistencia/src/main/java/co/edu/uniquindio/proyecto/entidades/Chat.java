@@ -20,12 +20,16 @@ public class Chat implements Serializable {
     private Integer codigo;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Usuario usuario;
 
     @OneToMany(mappedBy = "chat")
+    @ToString.Exclude
     private List<Mensaje> listaMansajes;
 
-    public Chat(Usuario usuario) {
+    public Chat(Integer codigo, Usuario usuario) {
+        this.codigo = codigo;
         this.usuario = usuario;
     }
+
 }

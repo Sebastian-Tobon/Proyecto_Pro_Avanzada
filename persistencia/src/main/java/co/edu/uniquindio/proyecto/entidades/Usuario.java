@@ -12,22 +12,26 @@ import java.util.Map;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class Usuario extends Persona implements Serializable {
 
     @ManyToOne
     private Ciudad ciudad;
 
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
     private List<Chat> listaChats;
 
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
     private List<Comentario> listaComentarios;
 
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
     private List<Compra> listaCompras;
 
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
     private List<Producto> listaProductos;
 
     @ManyToMany(mappedBy = "usuarios")
