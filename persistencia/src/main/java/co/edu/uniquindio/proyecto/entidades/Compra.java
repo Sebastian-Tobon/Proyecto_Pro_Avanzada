@@ -19,9 +19,6 @@ public class Compra implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
-    @Column(nullable = false)
-    private Integer Codigousuario;
-
     @Column(nullable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDate fechaCompra;
 

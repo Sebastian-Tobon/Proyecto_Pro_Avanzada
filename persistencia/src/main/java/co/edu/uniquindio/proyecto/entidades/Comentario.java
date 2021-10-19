@@ -19,12 +19,6 @@ public class Comentario implements Serializable {
     private Integer codigo;
 
     @Column(nullable = false)
-    private Integer codigoProducto;
-
-    @Column(nullable = false)
-    private Integer codigoUsuario;
-
-    @Column(nullable = false)
     private String mensaje;
 
     @Column(nullable = false)

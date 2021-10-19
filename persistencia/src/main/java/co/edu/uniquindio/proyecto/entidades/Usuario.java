@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -11,7 +12,7 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @ToString
-public class Usuario {
+public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,4 +33,7 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario")
     private List<Producto> listaProductos;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<DetalleSubasta> listaDetalleSubasta;
 }

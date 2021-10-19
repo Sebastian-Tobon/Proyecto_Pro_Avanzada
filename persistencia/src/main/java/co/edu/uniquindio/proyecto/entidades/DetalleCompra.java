@@ -19,12 +19,6 @@ public class DetalleCompra implements Serializable {
     private Integer codigo;
 
     @Column(nullable = false)
-    private Integer codigoCompra;
-
-    @Column(nullable = false)
-    private Integer codigoProducto;
-
-    @Column(nullable = false)
     @Positive
     private Integer unidades;
 

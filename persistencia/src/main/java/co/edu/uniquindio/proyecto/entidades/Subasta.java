@@ -4,7 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -12,7 +14,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @ToString
-public class Subasta {
+public class Subasta implements Serializable {
 
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
@@ -25,6 +27,9 @@ public class Subasta {
 
     @ManyToOne
     private Producto producto;
+
+    @OneToMany(mappedBy = "subasta")
+    private List<DetalleSubasta> detalleSubasta;
 
     public Subasta(LocalDateTime fecha_limite) {
         this.fecha_limite = fecha_limite;

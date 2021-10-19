@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,11 +20,11 @@ public class DetalleSubasta implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
-    @Column(nullable = false)
-    private Integer codigoSubasta;
+    @ManyToOne
+    private Subasta subasta;
 
-    @Column(nullable = false)
-    private Integer codigoUsuario;
+    @ManyToOne
+    private Usuario usuario;
 
     @Column(nullable = false)
     @Positive
