@@ -37,16 +37,20 @@ public class Producto implements Serializable {
     @Positive
     private Integer precio;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Future
     private LocalDateTime fecha_limite;
+
+    @Column(nullable = false)
+    @Positive
+    private Integer descuento;
 
     @OneToMany(mappedBy = "producto")
     private List<Comentario> listaComentarios;
 
     @ElementCollection
     @Column(nullable = false)
-    private Map<String, String> listaImagenes;
+    private List<String> listaImagenes;
 
     @ManyToOne
     private Usuario usuario;
