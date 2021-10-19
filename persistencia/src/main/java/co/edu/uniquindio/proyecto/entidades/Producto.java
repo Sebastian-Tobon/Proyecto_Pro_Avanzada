@@ -46,7 +46,7 @@ public class Producto implements Serializable {
 
     @ElementCollection
     @Column(nullable = false)
-    private Map<String, String> listaImagenes;
+    private List<String> listaImagenes;
 
     @ManyToOne
     private Usuario usuario;

@@ -34,4 +34,5 @@ public class Subasta implements Serializable {
     public Subasta(LocalDateTime fecha_limite) {
         this.fecha_limite = fecha_limite;
     }
+
 }

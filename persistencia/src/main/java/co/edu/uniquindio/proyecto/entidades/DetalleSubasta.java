@@ -32,4 +32,9 @@ public class DetalleSubasta implements Serializable {
 
     @Column(nullable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDate fechaSubasta;
+
+    public DetalleSubasta(Integer valor, LocalDate fechaSubasta) {
+        this.valor = valor;
+        this.fechaSubasta = fechaSubasta;
+    }
 }

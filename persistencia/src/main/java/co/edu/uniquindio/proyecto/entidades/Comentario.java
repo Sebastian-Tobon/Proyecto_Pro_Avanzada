@@ -38,4 +38,10 @@ public class Comentario implements Serializable {
     @JoinColumn(nullable = false)
     private Usuario usuario;
 
+    public Comentario(String mensaje, String respuesta, LocalDateTime fechaComentario, Float calificacion) {
+        this.mensaje = mensaje;
+        this.respuesta = respuesta;
+        this.fechaComentario = fechaComentario;
+        this.calificacion = calificacion;
+    }
 }

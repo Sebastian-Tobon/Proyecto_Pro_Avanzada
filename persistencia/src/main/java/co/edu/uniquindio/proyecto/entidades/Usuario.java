@@ -15,11 +15,6 @@ import java.util.Map;
 @ToString
 public class Usuario extends Persona implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    private Integer codigo;
-
     @ManyToOne
     private Ciudad ciudad;
 
@@ -41,4 +36,10 @@ public class Usuario extends Persona implements Serializable {
     @ElementCollection
     @Column(nullable = false)
     private Map<String, String> numTelefono;
+
+    public Usuario(Integer codigo, String nombre, String email, String password, Ciudad ciudad, Map<String, String> numTelefono) {
+        super(codigo, nombre, email, password);
+        this.ciudad = ciudad;
+        this.numTelefono = numTelefono;
+    }
 }

@@ -24,4 +24,9 @@ public class Categoria implements Serializable {
 
     @ManyToMany
     private List<Producto> productos;
+
+    public Categoria(Integer codigo, String nombre) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+    }
 }
