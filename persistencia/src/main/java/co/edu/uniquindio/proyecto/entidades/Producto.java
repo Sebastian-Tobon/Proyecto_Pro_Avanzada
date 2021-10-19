@@ -7,6 +7,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -41,6 +42,10 @@ public class Producto {
 
     @OneToMany(mappedBy = "producto")
     private List<Comentario> listaDepartamentos;
+
+    @ElementCollection
+    @Column(nullable = false)
+    private Map<String, String> listaImagenes;
 
     @ManyToOne
     private Usuario usuario;
