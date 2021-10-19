@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -36,4 +37,8 @@ public class Usuario implements Serializable {
 
     @OneToMany(mappedBy = "usuario")
     private List<DetalleSubasta> listaDetalleSubasta;
+
+    @ElementCollection
+    @Column(nullable = false)
+    private Map<String, String> numTelefono;
 }
