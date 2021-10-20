@@ -29,6 +29,7 @@ public class Compra implements Serializable {
     private Usuario usuario;
 
     @OneToMany(mappedBy = "compra")
+    @ToString.Exclude
     private List<DetalleCompra> listaDetallesCompra;
 
     public Compra(Integer codigo, LocalDate fechaCompra, String medioPago, Usuario usuario) {

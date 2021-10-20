@@ -67,3 +67,37 @@ values (201, '2021-11-05', 1),
        (203, '2023-03-25', 3),
        (204, '2022-01-6', 2),
        (205, '2022-01-20', 2);
+
+-- Inserts Compra
+insert into compra
+values (100, '2021-11-05', "Efectivo", 2001),
+        (101, '2021-10-15', "Targeta de Credito", 2002),
+        (102, '2021-11-06', "Efectivo", 2003),
+        (103, '2021-12-25', "Targeta de Credito", 2004),
+        (104, '2021-12-01', "Targeta de Credito", 2004);
+
+-- Inserts DetalleCompra
+insert into detalle_compra
+values (100, 150.000, 60, 101, 1),
+       (101, 150.000, 20, 100, 2),
+       (102, 150.000, 80, 102, 3),
+       (103, 150.000, 40, 100, 3),
+       (104, 150.000, 10, 104, 1);
+
+-- Inserts DetalleSubasta
+insert into detalle_subasta
+values (300, '2021-10-05', 600000, 201, 2001),
+       (301, '2021-08-15', 2500000, 202, 2002),
+       (302, '2021-12-07', 1600000, 201, 2003),
+       (303, '2021-11-22', 900000, 203, 2004),
+       (304, '2021-11-11', 500000, 204, 2007),
+       (305, '2021-01-05', 1230000, 205, 2006);
+
+-- Inserts Mensaje
+insert into mensaje
+values (1000, 'Emiliano Gil', '2021-12-07', "Excelente producto, 10/10", 124),
+       (1001, 'Sofia Cardona', '2021-01-27', "Cuando regresa la promocion, Excelente producto", 123),
+       (1002, 'Fernando Ramirez', '2021-10-17', "Puedo Cambiar mis productos", 125),
+       (1003, 'Jhonatan Garcia', '2021-08-07', "Con cuanta garantia trae el producto de la Carpa", 124),
+       (1004, 'Angie Carmona', '2021-05-30', "Donde puedo adquirir los productos presencial", 127),
+       (1005, 'Johan Tamara', '2021-11-11', "Excelente servicio", 126);
