@@ -43,7 +43,7 @@ public class Producto implements Serializable {
 
     @Column(nullable = false)
     @Positive
-    private Integer descuento;
+    private Float descuento;
 
     @OneToMany(mappedBy = "producto")
     private List<Comentario> listaComentarios;
