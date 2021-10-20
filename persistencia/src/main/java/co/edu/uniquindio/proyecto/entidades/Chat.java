@@ -21,15 +21,19 @@ public class Chat implements Serializable {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private Usuario usuario;
+    private Usuario usuario_comprador;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Producto codigo_producto;
 
     @OneToMany(mappedBy = "chat")
     @ToString.Exclude
     private List<Mensaje> listaMansajes;
 
-    public Chat(Integer codigo, Usuario usuario) {
+    public Chat(Integer codigo, Usuario usuario_comprador, Producto codigo_producto) {
         this.codigo = codigo;
-        this.usuario = usuario;
+        this.usuario_comprador = usuario_comprador;
+        this.codigo_producto = codigo_producto;
     }
-
 }

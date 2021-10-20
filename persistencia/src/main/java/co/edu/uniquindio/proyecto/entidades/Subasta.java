@@ -29,10 +29,12 @@ public class Subasta implements Serializable {
     private Producto producto;
 
     @OneToMany(mappedBy = "subasta")
+    @ToString.Exclude
     private List<DetalleSubasta> detalleSubasta;
 
-    public Subasta(LocalDateTime fecha_limite) {
+    public Subasta(Integer codigo, LocalDateTime fecha_limite, Producto producto) {
+        this.codigo = codigo;
         this.fecha_limite = fecha_limite;
+        this.producto = producto;
     }
-
 }

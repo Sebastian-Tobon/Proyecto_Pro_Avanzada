@@ -1,6 +1,5 @@
 package co.edu.uniquindio.proyecto.test;
 
-import co.edu.uniquindio.proyecto.entidades.Administrador;
 import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
 import org.junit.jupiter.api.Assertions;
@@ -20,19 +19,22 @@ public class CategoriaTest {
     private CategoriaRepo categoriaRepo;
     //Registrar Categoria
     @Test
-    @Sql("classpath:categorias.sql")
+    @Sql("classpath:dbInserts.sql")
     public void registrarCategoriaTest(){
 
+        //Creo una Categoria
         Categoria categoria = new Categoria(106,"Deporte");
+        //Guardo la Categoria
         Categoria categoriaGuardado = categoriaRepo.save(categoria);
 
         System.out.println(categoriaGuardado);
+        //Verificación
         Assertions.assertNotNull(categoriaGuardado);
     }
 
     //Actualizar Categoria
     @Test
-    @Sql("classpath:categorias.sql")
+    @Sql("classpath:dbInserts.sql")
     public void actualizarCategoriaTest(){
 
         Categoria guardado = categoriaRepo.findById(104).orElse(null);
@@ -51,7 +53,7 @@ public class CategoriaTest {
 
     //Eliminar Categoria
     @Test
-    @Sql("classpath:categorias.sql")
+    @Sql("classpath:dbInserts.sql")
     public void eliminarCategoriaTest(){
 
         //Elimino la categoria "104"
@@ -67,8 +69,9 @@ public class CategoriaTest {
 
     //Listar Categorias
     @Test
-    @Sql("classpath:categorias.sql")
+    @Sql("classpath:dbInserts.sql")
     public void listarCategoriaTest(){
+        //Listar las Categorias
         List<Categoria> categorias = categoriaRepo.findAll();
 
         //Imprimir la lista de categorias

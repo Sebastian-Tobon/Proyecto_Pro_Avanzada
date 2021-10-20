@@ -15,10 +15,13 @@ import java.util.Map;
 @ToString(callSuper = true)
 public class Usuario extends Persona implements Serializable {
 
+    @Column(nullable = false, length = 20)
+    private String rol;
+
     @ManyToOne
     private Ciudad ciudad;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario_comprador")
     @ToString.Exclude
     private List<Chat> listaChats;
 
@@ -41,8 +44,9 @@ public class Usuario extends Persona implements Serializable {
     @Column(nullable = false)
     private Map<String, String> numTelefono;
 
-    public Usuario(Integer codigo, String nombre, String email, String password, Ciudad ciudad, Map<String, String> numTelefono) {
+    public Usuario(Integer codigo, String nombre, String email, String password, String rol, Ciudad ciudad, Map<String, String> numTelefono) {
         super(codigo, nombre, email, password);
+        this.rol = rol;
         this.ciudad = ciudad;
         this.numTelefono = numTelefono;
     }

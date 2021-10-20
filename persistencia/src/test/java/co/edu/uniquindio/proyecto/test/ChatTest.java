@@ -1,10 +1,10 @@
 package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.entidades.Chat;
-import co.edu.uniquindio.proyecto.entidades.Ciudad;
+import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.ChatRepo;
-import co.edu.uniquindio.proyecto.repositorios.CiudadRepo;
+import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,36 +23,42 @@ public class ChatTest {
     private ChatRepo chatRepo;
 
     @Autowired
-    private CiudadRepo  ciudadRepo;
+    private UsuarioRepo usuarioRepo;
 
     @Autowired
-    private UsuarioRepo usuarioRepo;
+    private ProductoRepo productoRepo;
 
     //Registrar Chat
     @Test
-    @Sql("classpath:chats.sql")
+    @Sql("classpath:dbInserts.sql")
     public void registrarChatTest(){
 
         //Traigo el Usuario (2001) "Mario Fuentes"
         Usuario usuario = usuarioRepo.findById(2001).orElse(null);
 
-        Chat chat = new Chat(128, usuario);
+        //Traigo el producto (2) "ASADOR CARBON TIPO BARRIL CHAR-BROIL"
+        Producto producto = productoRepo.findById(2).orElse(null);
+
+        //Creo un Chat
+        Chat chat = new Chat(128, usuario,producto);
+        //Guardo el Chat
         Chat chatGuardado = chatRepo.save(chat);
 
         System.out.println(chatGuardado);
+        //Verificaión
         Assertions.assertNotNull(chatGuardado);
     }
 
     //Actualizar Chat
     @Test
-    @Sql("classpath:chats.sql")
+    @Sql("classpath:dbInserts.sql")
     public void actualizarChatTest(){
 
         Chat guardado = chatRepo.findById(124).orElse(null);
-        //modifico el Usuario
+        //modifico el chat
         guardado.setCodigo(128);
 
-        //guardo la categoria
+        //guardo la chat
         chatRepo.save(guardado);
 
         Chat chatBuscado = chatRepo.findById(124).orElse(null);
@@ -64,7 +70,7 @@ public class ChatTest {
 
     //Eliminar Chat
     @Test
-    @Sql("classpath:chats.sql")
+    @Sql("classpath:dbInserts.sql")
     public void eliminarChatTest(){
 
         //Elimino el chat "125"
@@ -79,8 +85,9 @@ public class ChatTest {
 
     //Listar Chats
     @Test
-    @Sql("classpath:chats.sql")
+    @Sql("classpath:dbInserts.sql")
     public void listarChatTest(){
+        //Listo los Chats
         List<Chat> chats = chatRepo.findAll();
 
         //Imprimir la lista de Chats

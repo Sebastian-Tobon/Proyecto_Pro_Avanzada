@@ -20,19 +20,21 @@ public class AdministradorTest {
 
     //Registrar Administrador
     @Test
-    @Sql("classpath:administradores.sql")
+    @Sql("classpath:dbInserts.sql")
     public void registrarAdministradorTest(){
-
-        Administrador administrador = new Administrador(1006,"Carlos2", "carlos2@email.com", "A12345");
+        //Creo un Administrador
+        Administrador administrador = new Administrador(1009,"Carlos2", "carlos2@email.com", "A12345");
+        //Guardo el Administrador
         Administrador administradorGuardado = administradorRepo.save(administrador);
 
         System.out.println(administradorGuardado);
+        //Verificaion
         Assertions.assertNotNull(administradorGuardado);
     }
 
     //Actualizar Administrador
     @Test
-    @Sql("classpath:administradores.sql")
+    @Sql("classpath:dbInserts.sql")
     public void actualizarAdministradorTest(){
 
         Administrador guardado = administradorRepo.findById(1005).orElse(null);
@@ -52,9 +54,9 @@ public class AdministradorTest {
 
     //Eliminar Administrador
     @Test
-    @Sql("classpath:administradores.sql")
+    @Sql("classpath:dbInserts.sql")
     public void eliminarAdministradorTest(){
-
+        //Elimino el administrador
         administradorRepo.deleteById(1004);
 
         Administrador adminBuscado = administradorRepo.findById(1004).orElse(null);
@@ -66,13 +68,12 @@ public class AdministradorTest {
 
     //Listar Administrador
     @Test
-    @Sql("classpath:administradores.sql")
+    @Sql("classpath:dbInserts.sql")
     public void listarAdministradorTest(){
+        //Listar los administradores
         List<Administrador> administradores = administradorRepo.findAll();
 
         //Imprimir la lista de los Administradores
         administradores.forEach(u -> System.out.println(u));
     }
-
-
 }
