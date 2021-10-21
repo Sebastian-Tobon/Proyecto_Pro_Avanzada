@@ -8,6 +8,20 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * En la clase Subasta se gestionara el producto que entrara en esta actividad.
+ * Integer codigo
+ * LocalDateTime fecha_limite
+ * Producto producto
+ * List<DetalleSubasta> detalleSubasta
+ *
+ *
+ * Integrantes:
+ * Juan Sebastian Tobon Alcaraz
+ * Sebastian Londoño
+ * Rodrigo Acosta Restrepo
+ */
+
 @Entity
 @Getter
 @Setter
@@ -32,6 +46,12 @@ public class Subasta implements Serializable {
     @ToString.Exclude
     private List<DetalleSubasta> detalleSubasta;
 
+    /**
+     * Metodo constructor con argumentos
+     * @param codigo
+     * @param fecha_limite
+     * @param producto
+     */
     public Subasta(Integer codigo, LocalDateTime fecha_limite, Producto producto) {
         this.codigo = codigo;
         this.fecha_limite = fecha_limite;

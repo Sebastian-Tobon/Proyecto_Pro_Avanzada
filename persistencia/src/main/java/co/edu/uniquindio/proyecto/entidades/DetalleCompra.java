@@ -6,6 +6,21 @@ import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 
+/**
+ * En la clase DetalleCompra se prentende guardar los datos de la compra realizada por el usuario,
+ * donde quedan los datos del producto y de la compra
+ * Integer codigo
+ * Integer unidades
+ * Double precioProducto
+ * Producto producto
+ * Compra compra
+ *
+ * Integrantes:
+ * Juan Sebastian Tobon Alcaraz
+ * Sebastian Londoño
+ * Rodrigo Acosta Restrepo
+ */
+
 @Entity
 @Getter
 @Setter
@@ -31,6 +46,14 @@ public class DetalleCompra implements Serializable {
     @ManyToOne
     private Compra compra;
 
+    /**
+     * Metodo constructor con argumentos
+     * @param codigo
+     * @param unidades
+     * @param precioProducto
+     * @param producto
+     * @param compra
+     */
     public DetalleCompra(Integer codigo, Integer unidades, Double precioProducto, Producto producto, Compra compra) {
         this.codigo = codigo;
         this.unidades = unidades;
