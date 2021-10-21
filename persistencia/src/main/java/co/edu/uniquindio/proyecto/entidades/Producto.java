@@ -55,7 +55,7 @@ public class Producto implements Serializable {
     @Positive
     private Integer precio;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Future
     private LocalDateTime fecha_limite;
 

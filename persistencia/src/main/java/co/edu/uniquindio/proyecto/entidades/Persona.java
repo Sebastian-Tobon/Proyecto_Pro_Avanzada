@@ -30,6 +30,7 @@ public class Persona implements Serializable {
 
     @Id
     @Column(length = 10)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer codigo;
 
