@@ -12,27 +12,29 @@ import java.util.Map;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class Usuario extends Persona implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    private Integer codigo;
+    @Column(nullable = false, length = 20)
+    private String rol;
 
     @ManyToOne
     private Ciudad ciudad;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario_comprador")
+    @ToString.Exclude
     private List<Chat> listaChats;
 
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
     private List<Comentario> listaComentarios;
 
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
     private List<Compra> listaCompras;
 
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
     private List<Producto> listaProductos;
 
     @ManyToMany(mappedBy = "usuarios")
@@ -41,4 +43,11 @@ public class Usuario extends Persona implements Serializable {
     @ElementCollection
     @Column(nullable = false)
     private Map<String, String> numTelefono;
+
+    public Usuario(Integer codigo, String nombre, String email, String password, String rol, Ciudad ciudad, Map<String, String> numTelefono) {
+        super(codigo, nombre, email, password);
+        this.rol = rol;
+        this.ciudad = ciudad;
+        this.numTelefono = numTelefono;
+    }
 }

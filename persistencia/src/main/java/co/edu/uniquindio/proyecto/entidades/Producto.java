@@ -8,7 +8,6 @@ import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Getter
@@ -46,7 +45,12 @@ public class Producto implements Serializable {
     private Float descuento;
 
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<Comentario> listaComentarios;
+
+    @OneToMany(mappedBy = "codigo_producto")
+    @ToString.Exclude
+    private List<Chat> listaChats;
 
     @ElementCollection
     @Column(nullable = false)
@@ -59,9 +63,11 @@ public class Producto implements Serializable {
     private Ciudad ciudad;
 
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<Subasta> listaSubastas;
 
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<DetalleCompra> listaDetallesCompra;
 
     @ManyToMany(mappedBy = "productos")
@@ -70,11 +76,15 @@ public class Producto implements Serializable {
     @ManyToMany
     private List<Usuario> usuarios;
 
-    public Producto(String nombre, Integer unidades, String descripcion, Integer precio, LocalDateTime fecha_limite) {
+    public Producto(Integer codigo, String nombre, Integer unidades, String descripcion, Integer precio, LocalDateTime fecha_limite, Float descuento, Usuario usuario, Ciudad ciudad) {
+        this.codigo = codigo;
         this.nombre = nombre;
         this.unidades = unidades;
         this.descripcion = descripcion;
         this.precio = precio;
         this.fecha_limite = fecha_limite;
+        this.descuento = descuento;
+        this.usuario = usuario;
+        this.ciudad = ciudad;
     }
 }
