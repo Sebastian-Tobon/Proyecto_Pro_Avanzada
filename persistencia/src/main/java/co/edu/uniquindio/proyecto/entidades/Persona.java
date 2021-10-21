@@ -5,6 +5,19 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * En la clase Persona se crean los atributos principales que sera heredadas por las otras clases.
+ * Integer codigo
+ * String nombre
+ * String email
+ * String password
+ *
+ * Integrantes:
+ * Juan Sebastian Tobon Alcaraz
+ * Sebastian Londoño
+ * Rodrigo Acosta Restrepo
+ */
+
 @Getter
 @Setter
 @NoArgsConstructor

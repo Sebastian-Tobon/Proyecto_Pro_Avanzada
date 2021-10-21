@@ -8,6 +8,21 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * En la clase DetalleSubasta se pretende gestionar la informacion del producto que se etsa subastando y el usuario que esta
+ * ofreciendo
+ * Integer codigo
+ * Subasta subasta
+ * Usuario usuario
+ * Integer valor
+ * LocalDate fechaSubasta
+ *
+ * Integrantes:
+ * Juan Sebastian Tobon Alcaraz
+ * Sebastian Londoño
+ * Rodrigo Acosta Restrepo
+ */
+
 @Entity
 @Getter
 @Setter
@@ -33,6 +48,14 @@ public class DetalleSubasta implements Serializable {
     @Column(nullable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDate fechaSubasta;
 
+    /**
+     * Metodo constructor con argumentos
+     * @param codigo
+     * @param subasta
+     * @param usuario
+     * @param valor
+     * @param fechaSubasta
+     */
     public DetalleSubasta(Integer codigo, Subasta subasta, Usuario usuario, Integer valor, LocalDate fechaSubasta) {
         this.codigo = codigo;
         this.subasta = subasta;

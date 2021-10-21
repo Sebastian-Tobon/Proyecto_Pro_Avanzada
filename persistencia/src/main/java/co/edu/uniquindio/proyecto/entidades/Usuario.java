@@ -7,6 +7,28 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * En la clase Usuario se gestionara el objeto segun su rol, usuario o vendedor
+ * Integer codigo
+ * String nombre
+ * String email
+ * String password
+ * String rol
+ * Ciudad ciudad
+ * Map<String, String> numTelefono
+ * List<Chat> listaChats
+ * List<Comentario> listaComentarios
+ * List<Compra> listaCompras
+ * List<Producto> listaProductos
+ *
+ *
+ *
+ * Integrantes:
+ * Juan Sebastian Tobon Alcaraz
+ * Sebastian Londoño
+ * Rodrigo Acosta Restrepo
+ */
+
 @Entity
 @Getter
 @Setter
@@ -44,6 +66,16 @@ public class Usuario extends Persona implements Serializable {
     @Column(nullable = false)
     private Map<String, String> numTelefono;
 
+    /**
+     * Metodo constructor con argumentos
+     * @param codigo
+     * @param nombre
+     * @param email
+     * @param password
+     * @param rol
+     * @param ciudad
+     * @param numTelefono
+     */
     public Usuario(Integer codigo, String nombre, String email, String password, String rol, Ciudad ciudad, Map<String, String> numTelefono) {
         super(codigo, nombre, email, password);
         this.rol = rol;

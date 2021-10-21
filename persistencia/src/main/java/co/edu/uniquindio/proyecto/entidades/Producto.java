@@ -9,6 +9,25 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * En la clase Producto se prentende gestionar todo lo relacionado con los productos
+ * Integer codigo
+ * String nombre
+ * Integer unidades
+ * String descripcion
+ * Integer precio
+ * LocalDateTime fecha_limite
+ * Float descuento
+ * Usuario usuario
+ * Ciudad ciudad
+ *
+ *
+ * Integrantes:
+ * Juan Sebastian Tobon Alcaraz
+ * Sebastian Londoño
+ * Rodrigo Acosta Restrepo
+ */
+
 @Entity
 @Getter
 @Setter
@@ -76,6 +95,18 @@ public class Producto implements Serializable {
     @ManyToMany
     private List<Usuario> usuarios;
 
+    /**
+     *Metodo constructor con argumentos
+     * @param codigo
+     * @param nombre
+     * @param unidades
+     * @param descripcion
+     * @param precio
+     * @param fecha_limite
+     * @param descuento
+     * @param usuario
+     * @param ciudad
+     */
     public Producto(Integer codigo, String nombre, Integer unidades, String descripcion, Integer precio, LocalDateTime fecha_limite, Float descuento, Usuario usuario, Ciudad ciudad) {
         this.codigo = codigo;
         this.nombre = nombre;

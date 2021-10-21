@@ -6,6 +6,22 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * En la clase Comentario se pretende guardar los comentarios que los usuarios dejaran en el producto relacionado.
+ * Integer codigo
+ * String mensaje
+ * String respuesta
+ * LocalDateTime fechaComentario
+ * Float calificacion
+ * Producto producto
+ * Usuario usuario
+ *
+ * Integrantes:
+ * Juan Sebastian Tobon Alcaraz
+ * Sebastian Londoño
+ * Rodrigo Acosta Restrepo
+ */
+
 @Entity
 @Getter
 @Setter
@@ -38,6 +54,16 @@ public class Comentario implements Serializable {
     @JoinColumn(nullable = false)
     private Usuario usuario;
 
+    /**
+     * Metodo constructor con argumentos
+     * @param codigo
+     * @param mensaje
+     * @param respuesta
+     * @param fechaComentario
+     * @param calificacion
+     * @param producto
+     * @param usuario
+     */
     public Comentario(Integer codigo, String mensaje, String respuesta, LocalDateTime fechaComentario, Float calificacion, Producto producto, Usuario usuario) {
         this.codigo = codigo;
         this.mensaje = mensaje;
