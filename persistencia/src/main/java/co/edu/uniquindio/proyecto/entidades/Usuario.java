@@ -37,10 +37,8 @@ import java.util.Map;
 @ToString(callSuper = true)
 public class Usuario extends Persona implements Serializable {
 
-    @Column(nullable = false, length = 20)
-    private String rol;
-
     @ManyToOne
+    @JoinColumn(nullable = false)  //nuevo
     private Ciudad ciudad;
 
     @OneToMany(mappedBy = "usuario_comprador")
@@ -55,30 +53,33 @@ public class Usuario extends Persona implements Serializable {
     @ToString.Exclude
     private List<Compra> listaCompras;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "vendedor")       //modificado
     @ToString.Exclude
-    private List<Producto> listaProductos;
+    private List<Producto> listaProductosVenta;     //modificado
 
-    @ManyToMany(mappedBy = "usuarios")
-    private List<Producto> productos;
+    //@ManyToMany(mappedBy = "usuarios")
+    //@ToString.Exclude
+    //private List<Producto> productos;
 
     @ElementCollection
     @Column(nullable = false)
     private Map<String, String> numTelefono;
 
-    /**
-     * Metodo constructor con argumentos
-     * @param codigo
-     * @param nombre
-     * @param email
-     * @param password
-     * @param rol
-     * @param ciudad
-     * @param numTelefono
-     */
-    public Usuario(Integer codigo, String nombre, String email, String password, String rol, Ciudad ciudad, Map<String, String> numTelefono) {
+    @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    private List<DetalleSubasta> listaDetalleSubasta;       //nuevo
+
+    @Column(nullable = false, unique = true)
+    private String username;        //nuevo
+
+    //productos Favoritos
+    @ManyToMany
+    @ToString.Exclude
+    private List<Producto> usuarioListProductosFav;      //nuevo
+
+    public Usuario(Integer codigo, String nombre, String email, String password, String username, Ciudad ciudad, Map<String, String> numTelefono ) {
         super(codigo, nombre, email, password);
-        this.rol = rol;
+        this.username = username;
         this.ciudad = ciudad;
         this.numTelefono = numTelefono;
     }

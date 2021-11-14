@@ -9,11 +9,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
+
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -39,7 +45,7 @@ public class UsuarioTest {
         telefonos.put("Trabajo", "7579863");
 
         //Creo un Usuario
-        Usuario usuario = new Usuario(2010, "Mariana Correa", "mariana@email.com", "B02020", "Vendedor",ciudad,telefonos);
+        Usuario usuario = new Usuario(2010, "Mariana Correa", "mariana@email.com", "B02020","correa112",ciudad,telefonos);
         //Guardo el Usuario
         Usuario usuarioGuardado = usuarioRepo.save(usuario);
 
@@ -93,4 +99,30 @@ public class UsuarioTest {
         //Imprimir la lista de Usuarios
         usuarios.forEach(u -> System.out.println(u));
     }
+
+    @Test
+    @Sql("classpath:dbInserts.sql")
+    public void filtrarNombreTest(){
+        List<Usuario> lista = usuarioRepo.findAllByNombreContains("Maria Cardenas");
+        lista.forEach(System.out::println );
+    }
+
+    @Test
+    @Sql("classpath:dbInserts.sql")
+    public void paginarListaTest(){
+
+        Pageable paginador = PageRequest.of(0,2);
+
+        Page<Usuario> lista = usuarioRepo.findAll(paginador);
+        System.out.println(lista.stream().collect(Collectors.toList()));
+    }
+
+    @Test
+    @Sql("classpath:dbInserts.sql")
+    public void ordenarListaTest(){
+
+        List<Usuario> lista = usuarioRepo.findAll(Sort.by("nombre"));
+        System.out.println(lista.stream().collect(Collectors.toList()));
+    }
+
 }

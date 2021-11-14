@@ -20,19 +20,19 @@ insert into ciudad values (4, "Cali");
 insert into ciudad values (5, "Medellin");
 
 -- Insert de Usuario
-insert into usuario values (2001, "Maria Cardenas", "maria@email.com", "B2134", "Vendedor", 1);
-insert into usuario values (2002, "Mario Fuentes", "mario@email.com", "C7896", "Vendedor", 2);
-insert into usuario values (2003, "Sol Ramires", "sol@email.com", "B4562", "Comprador", 3);
-insert into usuario values (2004, "fabian cruz", "fabian@email.com", "C1238", "Comprador", 4);
-insert into usuario values (2005, "Chaves alzate", "chaves@email.com", "C4662", "Comprador", 5);
-insert into usuario values (2006, 'Angela Ramirez', 'niyora6002@wii999.com', 'y%NZi2HIUZ', "Comprador", 1);
-insert into usuario values (2007, 'Sofia Cardona', 'jekoxo1677@wii999.com', 'MdmxC#yQHX', "Vendedor", 2);
-insert into usuario values(2008, 'Daniela Restrepo', 'gexovo3160@smuvaj.com', 'TQ,c4^sz&-', "Comprador", 3);
+insert into usuario values (2001, "maria@email.com", "Maria Cardenas",  "B2134","maria2021", 1);
+insert into usuario values (2002, "mario@email.com", "Mario Fuentes",  "C7896","mario45", 2);
+insert into usuario values (2003, "sol@email.com", "Sol Ramires",  "B4562","sol91", 3);
+insert into usuario values (2004, "fabian@email.com", "fabian cruz",  "C1238","fabian1889", 4);
+insert into usuario values (2005, "chaves@email.com", "Chaves alzate",  "C4662","chavesss", 5);
+insert into usuario values (2006, 'niyora6002@wii999.com', 'Angela Ramirez',  'y%NZi2HIUZ',"angel001", 1);
+insert into usuario values (2007, 'jekoxo1677@wii999.com', 'Sofia Cardona',  'MdmxC#yQHX',"sofi23", 2);
+insert into usuario values(2008, 'gexovo3160@smuvaj.com', 'Daniela Restrepo',  'TQ,c4^sz&-',"dani2002", 3);
 
 -- Insert de Producto
-insert into producto (codigo, nombre, unidades, descripcion, precio, fecha_limite, descuento, usuario_codigo, ciudad_codigo)
+insert into producto (codigo, nombre, unidades, descripcion, precio, fecha_limite, descuento, vendedor_codigo, ciudad_codigo)
 values (1, 'Morral camping 95Lts', 50, 'nailon Importado Material duradero: fabricado con tela de nailon de alta calidad y material resistente al agua que son duraderos y más resistentes al agua que la mochila de senderismo tradicional.',
-        199000, '2021-12-19', 0.27, 2003, 1),
+        199000, '2021-12-19', 0.27, 2001, 1),
        (2, 'Carpa para Camping para 4 Personas Dome Klimber Camp', 19, 'Carpa Iglú Dome Para 4 Personas Klimber
 La Carpa Iglú para 4 Personas Dome Color Gris de Klimber sirve para brindar alojamiento y protección en actividades al aire libre.',
         259000, '2022-03-19', 0.23, 2002, 2),
@@ -101,3 +101,13 @@ values (1000, 'Emiliano Gil', '2021-12-07', "Excelente producto, 10/10", 124),
        (1003, 'Jhonatan Garcia', '2021-08-07', "Con cuanta garantia trae el producto de la Carpa", 124),
        (1004, 'Angie Carmona', '2021-05-30', "Donde puedo adquirir los productos presencial", 127),
        (1005, 'Johan Tamara', '2021-11-11', "Excelente servicio", 126);
+
+-- Insert Productos Favoritos Usuario
+insert into usuario_usuario_list_productos_fav
+values ('2001', 1);
+insert into usuario_usuario_list_productos_fav
+values ('2001', 2);
+insert into usuario_usuario_list_productos_fav
+values ('2003', 3);
+insert into usuario_usuario_list_productos_fav
+values ('2004', 2);

@@ -48,6 +48,9 @@ public class Producto implements Serializable {
     @Positive
     private Integer unidades;
 
+   // @Column(nullable = false)
+    //private String nombrePublicacion;       //nuevo
+
     @Column(nullable = false)
     private String descripcion;
 
@@ -76,7 +79,8 @@ public class Producto implements Serializable {
     private List<String> listaImagenes;
 
     @ManyToOne
-    private Usuario usuario;
+    @JoinColumn(nullable = false)
+    private Usuario vendedor;
 
     @ManyToOne
     private Ciudad ciudad;
@@ -92,8 +96,17 @@ public class Producto implements Serializable {
     @ManyToMany(mappedBy = "productos")
     private List<Categoria> categorias;
 
-    @ManyToMany
-    private List<Usuario> usuarios;
+   // @ElementCollection
+   // @Column(nullable = false)
+   // private List<Categoria> categorias;
+
+    //@ManyToMany
+    //@ToString.Exclude
+    //private List<Usuario> usuarios;
+
+    @ManyToMany(mappedBy = "usuarioListProductosFav")       //nuevo
+    @ToString.Exclude
+    private List<Usuario> prodListUsuarioProdFav;
 
     /**
      *Metodo constructor con argumentos
@@ -104,10 +117,10 @@ public class Producto implements Serializable {
      * @param precio
      * @param fecha_limite
      * @param descuento
-     * @param usuario
+     * @param vendedor
      * @param ciudad
      */
-    public Producto(Integer codigo, String nombre, Integer unidades, String descripcion, Integer precio, LocalDateTime fecha_limite, Float descuento, Usuario usuario, Ciudad ciudad) {
+    public Producto(Integer codigo, String nombre, Integer unidades, String descripcion, Integer precio, LocalDateTime fecha_limite, Float descuento, Usuario vendedor, Ciudad ciudad) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.unidades = unidades;
@@ -115,7 +128,7 @@ public class Producto implements Serializable {
         this.precio = precio;
         this.fecha_limite = fecha_limite;
         this.descuento = descuento;
-        this.usuario = usuario;
+        this.vendedor = vendedor;
         this.ciudad = ciudad;
     }
 }
