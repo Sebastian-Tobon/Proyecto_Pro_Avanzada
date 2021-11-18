@@ -19,6 +19,7 @@ import java.util.List;
 
 @Repository
 public interface ComentarioRepo extends JpaRepository<Comentario, Integer> {
+
     @Query("select c from Comentario  c where  c.calificacion between  :calificacionMenor and :calificacionMayor")
     List<Comentario> listarComentarioRango(int calificacionMenor, int calificacionMayor);
 }

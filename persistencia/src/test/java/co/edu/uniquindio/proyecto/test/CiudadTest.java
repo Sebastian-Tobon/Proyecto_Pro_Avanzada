@@ -87,4 +87,12 @@ public class CiudadTest {
         // usuarios.forEach(System.out::println);
         Assertions.assertEquals(2, usuarios.size());
     }
+
+    @Test
+    @Sql("classpath:dbInserts.sql")
+    public void listarUsuariosXCiudadTest() {
+        List<Object[]> respuesta = ciudadRepo.obtenerTotalUsuariosXCiudad();
+        respuesta.forEach(r -> System.out.println(r[0]+"-->"+r[1]));
+        Assertions.assertEquals(5,respuesta.size());
+    }
 }

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.entidades.Compra;
+import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
@@ -86,5 +87,14 @@ public class Compratest {
 
         //Imprimir la lista de Compras
         compras.forEach(u -> System.out.println(u));
+    }
+
+    @Test
+    @Sql("classpath:dbInserts.sql")
+    public void listarProductosCompradosTest(){
+        //Listo los Productos Comprados
+        Long totalproductos = compraRepo.obtenerListaProductosComprados(2001);
+        System.out.println("El total de productos Comprados es : ---->"+totalproductos);
+        Assertions.assertEquals(2,totalproductos);
     }
 }

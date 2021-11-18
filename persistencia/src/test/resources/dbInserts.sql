@@ -30,15 +30,14 @@ insert into usuario values (2007, 'jekoxo1677@wii999.com', 'Sofia Cardona',  'Md
 insert into usuario values(2008, 'gexovo3160@smuvaj.com', 'Daniela Restrepo',  'TQ,c4^sz&-',"dani2002", 3);
 
 -- Insert de Producto
-insert into producto (codigo, nombre, unidades, descripcion, precio, fecha_limite, descuento, vendedor_codigo, ciudad_codigo)
-values (1, 'Morral camping 95Lts', 50, 'nailon Importado Material duradero: fabricado con tela de nailon de alta calidad y material resistente al agua que son duraderos y más resistentes al agua que la mochila de senderismo tradicional.',
-        199000, '2021-12-19', 0.27, 2001, 1),
-       (2, 'Carpa para Camping para 4 Personas Dome Klimber Camp', 19, 'Carpa Iglú Dome Para 4 Personas Klimber
-La Carpa Iglú para 4 Personas Dome Color Gris de Klimber sirve para brindar alojamiento y protección en actividades al aire libre.',
-        259000, '2022-03-19', 0.23, 2002, 2),
-       (3, 'ASADOR CARBON TIPO BARRIL CHAR-BROIL', 100,
-        'Múltiples reguladores que permiten un fácil control del calor y el humo / Las ruedas de 8 pulgadas permiten una mayor movilidad / Con características que incluyen un estante lateral que ofrece mucho espacio para el trabajo de preparación',
-        508905, '2022-06-08', 0.15, 2007, 3);
+insert into producto (codigo, descripcion, descuento, fecha_limite, nombre, precio, unidades, ciudad_codigo, vendedor_codigo )
+values (1, 'nailon Importado Material duradero: fabricado con tela de nailon de alta calidad y material resistente al agua que son duraderos y más resistentes al agua que la mochila de senderismo tradicional.', 0.27, '2021-12-19',
+        'Morral Camping 95Lts', 199000, 50, 1, 2001),
+       (2, 'Carpa Iglú Dome Para 4 Personas Klimber La Carpa Iglú para 4 Personas Dome Color Gris de Klimber sirve para brindar alojamiento y protección en actividades al aire libre.',
+        0.23 , '2022-03-19', 'Carpa para Camping para 4 Personas Dome Klimber Camp', 259000, 19, 2, 2002),
+       (3, 'Múltiples reguladores que permiten un fácil control del calor y el humo / Las ruedas de 8 pulgadas permiten una mayor movilidad / Con características que incluyen un estante lateral que ofrece mucho espacio para el trabajo de preparación',
+        0.15,'2022-06-08' , 'ASADOR CARBON TIPO BARRIL CHAR-BROIL', 508000, 100, 3, 2007),
+        (4, 'Todo terreno', 0.22, '2021-12-31', 'bicicleta deportiva', 2500000, 20, 4, 2004);
 
 -- Insert de Chat
 insert into chat values (123, 2, 2001);
@@ -59,6 +58,19 @@ insert into usuario_num_telefono values (2005, "3225698742", "Personal");
 insert into comentario values (100, 3.8, '2021-10-19', "Muy debil la tela", "Lamentamos los inconvenientes", 1, 2002);
 insert into comentario values (101, 4.8, '2021-9-9', "Excelente producto", "Agradecemos su compra", 2, 2003);
 insert into comentario values (102, 2.5, '2021-3-29', "Mucha demora en el envio", "Lamentamos los inconvenientes en el envio del producto", 3, 2004);
+
+--Insert Categoria
+insert into categoria values (1, "Tecnologia");
+insert into categoria values (2, "Electrodomestico");
+insert into categoria values (3, "Ropa");
+insert into categoria values (4, "Accesorios");
+
+--Insert categoria_productos
+insert into categoria_productos values (1, 2);
+insert into categoria_productos values (2, 1);
+insert into categoria_productos values (3, 3);
+insert into categoria_productos values (4, 2);
+insert into categoria_productos values (4, 1);
 
 -- Inserts subasta
 insert into subasta

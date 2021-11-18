@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.dto.ProductoValido;
+import co.edu.uniquindio.proyecto.dto.ProductosXUsuario;
 import co.edu.uniquindio.proyecto.dto.UsuarioYProducto;
 import co.edu.uniquindio.proyecto.entidades.Ciudad;
 import co.edu.uniquindio.proyecto.entidades.Producto;
@@ -145,6 +146,38 @@ public class ProductoTest {
     public void listarProductosValidosTest() {
         List<ProductoValido> productos = productoRepo.listarProductosValidos(LocalDateTime.now());
         productos.forEach(System.out::println);
-        //Assertions.assertEquals(3,productos.size());
+        Assertions.assertEquals(3,productos.size());
+    }
+
+    @Test
+    @Sql("classpath:dbInserts.sql")
+    public void listarProductosXCategoriaTest() {
+        List<Object[]> respuesta = productoRepo.obtenerTotalProductosXCategoria();
+        respuesta.forEach(r -> System.out.println(r[0]+","+r[1]));
+        Assertions.assertEquals(4,respuesta.size());
+    }
+
+    @Test
+    @Sql("classpath:dbInserts.sql")
+    public void listarProductosSinComentariosTest() {
+        List<Producto> productos = productoRepo.obtenerProductosSinComentarios();
+        productos.forEach(System.out::println);
+        Assertions.assertEquals(1,productos.size());
+    }
+
+    @Test
+    @Sql("classpath:dbInserts.sql")
+    public void obtenerProductoxNombreTest() {
+        List<Producto> productos = productoRepo.buscarProductoXNombre("Camping");
+        productos.forEach(System.out::println);
+        Assertions.assertEquals(2,productos.size());
+    }
+
+    @Test
+    @Sql("classpath:dbInserts.sql")
+    public void obtenerProductosEnVentaTest() {
+        List<ProductosXUsuario> productos = productoRepo.obtenerProductosEnVenta();
+        productos.forEach(System.out::println);
+        Assertions.assertEquals(4,productos.size());
     }
 }

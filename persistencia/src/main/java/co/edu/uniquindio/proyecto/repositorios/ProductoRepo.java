@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.repositorios;
 
 import co.edu.uniquindio.proyecto.dto.ProductoValido;
+import co.edu.uniquindio.proyecto.dto.ProductosXUsuario;
 import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
@@ -42,4 +43,35 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
 
     @Query("select new co.edu.uniquindio.proyecto.dto.ProductoValido(p.nombre, p.descripcion, p.precio, p.ciudad) from Producto p where :fechaActual < p.fecha_limite")
     List<ProductoValido> listarProductosValidos(LocalDateTime fechaActual);
+
+    //Cree una consulta que permita contar el número de productos que hay por cada tipo de producto.
+    //Use GROUP BY.
+    @Query("select c.nombre, count(p) from Producto p join p.categorias c group by c")
+    List<Object[]> obtenerTotalProductosXCategoria();
+
+    //Cree una consulta que permita determinar que productos no tiene comentarios. Use IS EMPTY
+    @Query("select p from Producto p where p.listaComentarios is empty ")
+    List<Producto> obtenerProductosSinComentarios();
+
+    // Cree una consulta que devuelva una lista con todos los productos que contengan en su nombre una
+    //cadena de búsqueda. Use LIKE.
+    List<Producto> findByNombreContains(String nombre);
+    //Usando Query para buscar productos por nombre
+    @Query("select p from Producto p where p.nombre like concat('%', :nombre, '%')")
+    List<Producto> buscarProductoXNombre(String nombre);
+
+    //Cree un consulta que permita determinar cuántos productos ha publicado a la venta cada usuario.
+    //Devuelva un DTO con cédula del usuario, el email y número de registros.
+    @Query("select new co.edu.uniquindio.proyecto.dto.ProductosXUsuario(p.vendedor.codigo, p.vendedor.email, count(p)) from Producto p group by p.vendedor")
+    List<ProductosXUsuario> obtenerProductosEnVenta();
+
+    //Cree una consulta que permita determinar cuál es el tipo de producto que tiene más registros.HAcer test
+    @Query("select c, count (p) as total from Producto  p join p.categorias c group by c order by total desc")
+    List<Object[]> obtenerCategoriaMasUsada();
+
+    //Escriba una consulta que retorne la calificación promedio de un producto. Hacer Test
+    @Query("select avg(c.calificacion) from Producto  p join p.listaComentarios c where p.codigo = :codigo")
+    Float obtenerPromedioCalificaciones();
+
+
 }

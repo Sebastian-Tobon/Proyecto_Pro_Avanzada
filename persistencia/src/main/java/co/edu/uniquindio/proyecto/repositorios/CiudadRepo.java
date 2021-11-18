@@ -26,4 +26,8 @@ public interface CiudadRepo extends JpaRepository<Ciudad, Integer> {
 
     @Query("select u from Ciudad c join c.listaUsuarios u where c.nombre = :nombre")
     List<Usuario> listarUsuarios(String nombre);
+
+    //Cree una consulta que retorne la cantidad de usuarios por cada ciudad.
+    @Query("select c.nombre, count(u) from Ciudad c join c.listaUsuarios u group by c")
+    List<Object[]> obtenerTotalUsuariosXCiudad();
 }
