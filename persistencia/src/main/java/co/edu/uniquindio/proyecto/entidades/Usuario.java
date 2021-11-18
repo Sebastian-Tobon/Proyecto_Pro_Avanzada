@@ -38,7 +38,7 @@ import java.util.Map;
 public class Usuario extends Persona implements Serializable {
 
     @ManyToOne
-    @JoinColumn(nullable = false)  //nuevo
+    //@JoinColumn(nullable = false)  //nuevo
     private Ciudad ciudad;
 
     @OneToMany(mappedBy = "usuario_comprador")
@@ -77,7 +77,7 @@ public class Usuario extends Persona implements Serializable {
     @ToString.Exclude
     private List<Producto> usuarioListProductosFav;      //nuevo
 
-    public Usuario(Integer codigo, String nombre, String email, String password, String username, Ciudad ciudad, Map<String, String> numTelefono ) {
+    public Usuario(Integer codigo, String nombre, String email, String password, String username, Ciudad ciudad) {
         super(codigo, nombre, email, password);
         this.username = username;
         this.ciudad = ciudad;
