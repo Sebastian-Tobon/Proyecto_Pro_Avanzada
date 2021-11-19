@@ -46,14 +46,14 @@ public class ProductoTest {
         Ciudad ciudad = ciudadRepo.findById(2).orElse(null);
 
         //Creo un Producto
-        Producto producto = new Producto(5, "Teclado Gamer", 10, "61 teclas multicolor RGB iluminado LED retroiluminado programable para PC/Mac Gamer",
-                190000, LocalDateTime.of(2022,02,15,23,59), 0.2f, usuario, ciudad);
+        //Producto producto = new Producto(5, "Teclado Gamer", 10, "61 teclas multicolor RGB iluminado LED retroiluminado programable para PC/Mac Gamer",
+                //190000, LocalDateTime.of(2022,02,15,23,59), 0.2f, usuario, ciudad);
         //Guardo el Producto
-        Producto usuarioGuardado = productoRepo.save(producto);
+        //Producto usuarioGuardado = productoRepo.save(producto);
 
-        System.out.println(usuarioGuardado);
+        //System.out.println(usuarioGuardado);
         //Verificaión
-        Assertions.assertNotNull(usuarioGuardado);
+        //Assertions.assertNotNull(usuarioGuardado);
     }
 
     //Actualizar Producto

@@ -4,7 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -41,17 +43,20 @@ public class Producto implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
+    @NotBlank(message = "El nombre del Producto es Obligatorio")
     @Column(length = 100, nullable = false)
     private String nombre;
 
     @Column(nullable = false)
-    @Positive
+    @PositiveOrZero
     private Integer unidades;
 
-   // @Column(nullable = false)
-    //private String nombrePublicacion;       //nuevo
+    @NotBlank
+    @Column(nullable = false)
+    private String nombrePublicacion;       //nuevo
 
     @Column(nullable = false)
+    @NotBlank
     private String descripcion;
 
     @Column(nullable = false)
@@ -109,26 +114,24 @@ public class Producto implements Serializable {
     private List<Usuario> prodListUsuarioProdFav;
 
     /**
-     *Metodo constructor con argumentos
-     * @param codigo
+     *
      * @param nombre
      * @param unidades
+     * @param nombrePublicacion
      * @param descripcion
      * @param precio
      * @param fecha_limite
      * @param descuento
      * @param vendedor
-     * @param ciudad
      */
-    public Producto(Integer codigo, String nombre, Integer unidades, String descripcion, Integer precio, LocalDateTime fecha_limite, Float descuento, Usuario vendedor, Ciudad ciudad) {
-        this.codigo = codigo;
+    public Producto(String nombre, Integer unidades, String nombrePublicacion, String descripcion, Integer precio, LocalDateTime fecha_limite, Float descuento, Usuario vendedor) {
         this.nombre = nombre;
         this.unidades = unidades;
+        this.nombrePublicacion = nombrePublicacion;
         this.descripcion = descripcion;
         this.precio = precio;
         this.fecha_limite = fecha_limite;
         this.descuento = descuento;
         this.vendedor = vendedor;
-        this.ciudad = ciudad;
     }
 }

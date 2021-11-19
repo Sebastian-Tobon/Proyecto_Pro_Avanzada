@@ -60,5 +60,14 @@ public class UsuarioServicioTest {
         }
     }
 
-    //Todos los requerimientos del proyecto
+    @Test
+    public void iniciarSesionTest(){
+        try {
+            Usuario usuario = usuarioServicio.iniciarSesion("pepe@email.com", "456as");
+            Assertions.assertNotNull(usuario);
+        } catch (Exception e) {
+            Assertions.assertTrue(false, e.getMessage());
+        }
+    }
+
 }

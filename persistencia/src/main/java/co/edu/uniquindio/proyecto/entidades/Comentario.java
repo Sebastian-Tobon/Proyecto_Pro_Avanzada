@@ -34,9 +34,11 @@ public class Comentario implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
+    @Lob
     @Column(nullable = false)
     private String mensaje;
 
+    @Lob
     @Column(nullable = false)
     private String respuesta;
 
