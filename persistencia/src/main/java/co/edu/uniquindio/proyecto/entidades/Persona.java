@@ -32,7 +32,7 @@ public class Persona implements Serializable {
 
     @Id
     @Column(length = 10)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer codigo;
 
@@ -41,7 +41,7 @@ public class Persona implements Serializable {
     private String nombre;
 
     @Column(nullable = false, unique = true)
-    @Email
+    @Email(message = "Ingrese un Email Válido")
     private String email;
 
     @Column(nullable = false, length = 50)
