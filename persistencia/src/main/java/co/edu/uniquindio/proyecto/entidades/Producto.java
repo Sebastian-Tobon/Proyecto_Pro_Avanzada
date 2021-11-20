@@ -84,7 +84,7 @@ public class Producto implements Serializable {
     private List<String> listaImagenes;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    //@JoinColumn(nullable = false)
     private Usuario vendedor;
 
     @ManyToOne
