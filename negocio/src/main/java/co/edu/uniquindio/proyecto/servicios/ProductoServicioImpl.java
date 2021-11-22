@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.entidades.Compra;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.excepciones.ProductoNoEncontradoException;
+import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,12 @@ import java.util.Optional;
 @Service
 public class ProductoServicioImpl implements ProductoServicio{
 
+    private final CategoriaRepo categoriaRepo;
     private final ProductoRepo productoRepo;
 
-    public ProductoServicioImpl(ProductoRepo productoRepo) {
+    public ProductoServicioImpl(ProductoRepo productoRepo, CategoriaRepo categoriaRepo) {
         this.productoRepo = productoRepo;
+        this.categoriaRepo = categoriaRepo;
     }
 
     @Override
@@ -51,7 +54,12 @@ public class ProductoServicioImpl implements ProductoServicio{
 
     @Override
     public List<Producto> listarProductos(Categoria categoria) {
-        return null;
+        return productoRepo.listarProductosXCategoria(categoria);
+    }
+
+    @Override
+    public List<Producto> listarTodosProductos() {
+        return productoRepo.findAll();
     }
 
     @Override
@@ -82,5 +90,15 @@ public class ProductoServicioImpl implements ProductoServicio{
     @Override
     public List<Producto> listarProductos(Integer codigoUsuario) throws Exception {
         return null;
+    }
+
+    @Override
+    public List<Categoria> listarCategorias() {
+        return categoriaRepo.findAll();
+    }
+
+    @Override
+    public Categoria obtenerCategorias(Integer codigo) throws Exception {
+        return categoriaRepo.findById(codigo).orElseThrow(() -> new Exception("El Id no Corresponde a ninguna Categoria"));
     }
 }

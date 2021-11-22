@@ -29,6 +29,12 @@
                 <p:outputLabel value="Nickname:" for="nickname_usuario" required="true" />
                 <p:inputText id="nickname_usuario" value="#{usuarioBean.usuario.username}" required="true" />
 
+                <p:outputLabel value="Ciudad: " for="ciudad_usuario" />
+                <p:selectOneMenu id="ciudad_usuario" value="#{usuarioBean.usuario.ciudad}" converter="#{ciudadConverter}">
+                    <f:selectItem itemLabel="Seleccione Ciudad" noSelectionOption="true" />
+                    <f:selectItems value="#{usuarioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" />
+                </p:selectOneMenu>
+
                 <p:outputLabel value="Contraseña:" for="password_usuario" />
                 <p:password id="password_usuario" value="#{usuarioBean.usuario.password}" required="true" />
 

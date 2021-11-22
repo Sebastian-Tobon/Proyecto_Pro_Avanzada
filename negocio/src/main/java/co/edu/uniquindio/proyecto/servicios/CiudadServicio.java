@@ -1,7 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.Ciudad;
-import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 
 import java.util.List;
@@ -18,8 +17,8 @@ public interface CiudadServicio {
 
     Ciudad obtenerCiudadXCodigo(Integer codigo) throws Exception;
 
-    List<Usuario> listaUsuarios(String nombre) throws Exception;
+    List<Usuario> listarUsuarios(String nombre) throws Exception;
 
-
+    List<Ciudad> listarCiudades();
 
 }

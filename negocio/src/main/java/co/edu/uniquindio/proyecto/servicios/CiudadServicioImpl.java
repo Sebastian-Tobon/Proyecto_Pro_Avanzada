@@ -58,11 +58,7 @@ public class CiudadServicioImpl implements CiudadServicio{
 
     @Override
     public Ciudad obtenerCiudadXCodigo(Integer codigo) throws Exception {
-        Optional<Ciudad> buscado = ciudadRepo.findById(codigo);
-        if (buscado.isEmpty()){
-            throw  new Exception("La Ciudad no Existe");
-        }
-        return buscado.get();
+        return ciudadRepo.findById(codigo).orElseThrow(() -> new Exception("El Id no Corresponde a ninguna Ciudad"));
     }
 
     private Optional<Ciudad> buscarPorNombre(String nombre) {
@@ -70,11 +66,16 @@ public class CiudadServicioImpl implements CiudadServicio{
     }
 
     @Override
-    public List<Usuario> listaUsuarios(String nombre) throws Exception {
+    public List<Usuario> listarUsuarios(String nombre) throws Exception {
         Optional<Ciudad> buscado = buscarPorNombre(nombre);
         if (buscado.isEmpty()){
             throw  new Exception("El nombre de la Ciudad no Existe");
         }
         return ciudadRepo.listarUsuarios(nombre);
+    }
+
+    @Override
+    public List<Ciudad> listarCiudades() {
+        return ciudadRepo.findAll();
     }
 }

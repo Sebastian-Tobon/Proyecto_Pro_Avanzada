@@ -105,10 +105,6 @@ public class Producto implements Serializable {
    // @Column(nullable = false)
    // private List<Categoria> categorias;
 
-    //@ManyToMany
-    //@ToString.Exclude
-    //private List<Usuario> usuarios;
-
     @ManyToMany(mappedBy = "usuarioListProductosFav")       //nuevo
     @ToString.Exclude
     private List<Usuario> prodListUsuarioProdFav;
@@ -133,5 +129,12 @@ public class Producto implements Serializable {
         this.fecha_limite = fecha_limite;
         this.descuento = descuento;
         this.vendedor = vendedor;
+    }
+
+    public String getImagenPrincipal(){
+        if (listaImagenes != null && !listaImagenes.isEmpty()){
+            return listaImagenes.get(0);
+        }
+        return "default.jpg";
     }
 }

@@ -20,6 +20,8 @@ public interface ProductoServicio {
 
     List<Producto> listarProductos(Categoria categoria);
 
+    List<Producto> listarTodosProductos();
+
     void comentarProducto(String mensaje, Float calificacion, Usuario usuario, Producto producto) throws Exception;
 
     void guardarProductoFavorito(Producto producto, Usuario usuario)throws Exception;
@@ -31,4 +33,8 @@ public interface ProductoServicio {
     List<Producto> buscarProductos(String nombreProducto, String[] filtros);
 
     List<Producto> listarProductos(Integer codigoUsuario)throws Exception;
+
+    List<Categoria> listarCategorias();
+
+    Categoria obtenerCategorias(Integer codigo) throws Exception;
 }
