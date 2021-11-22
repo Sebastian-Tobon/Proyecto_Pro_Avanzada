@@ -17,47 +17,29 @@
 </h:head>
 <h:body>
     <div class="container">
-        <h:form>
-            <p:dataView value="#{busquedaBean.productos}" paginator="true" rows="4" var="producto" gridIcon="pi pi-th-large" listIcon="pi pi-bars">
-                <p:dataViewGridItem>
-                    <div class="card" >
-                        <img src="/uploads/#{producto.imagenPrincipal}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">#{producto.nombre}</h5>
-                            <p class="card-text">#{producto.precio}</p>
-                            <hr />
-                            <p:commandButton value="Ver detalle" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" action="#{inicioBean.irADetalle(producto.codigo)} />
-                            </div>
-                        </div>
-                    </p:dataViewGridItem>
-                    <p:dataViewListItem>
-                        <div class="row d-flex item-pro" >
-                        <div class="col-lg-2 col-md-1" style="text-align: center" >
-                            <p:graphicImage url="/uploads/#{producto.imagenPrincipal}"
-                            styleClass="imagen-producto" />
-                        </div>
-                        <div class="col-lg-8 col-md-1 align-self-center" >
-                            <p:outputPanel>
-                                <h:panelGrid columns="2" cellpadding="5">
-                                    <h:outputText value="Nombre:" />
-                                    <h:outputText value="#{producto.nombre}" style="font-weight:bold" />
-                                    <h:outputText value="Precio:" />
-                                    <h:outputText value="$#{producto.precio}" />
-                                    <h:outputText value="Categorías:" />
-                                    <h:outputText value="#{producto.categorias}" />
-                                    <h:outputText value="Descuento:" />
-                                    <h:outputText value="#{producto.descuento}" />
-                                </h:panelGrid>
-                            </p:outputPanel>
-                        </div>
-                        <div class="col-lg-2 col-md-1 align-self-center" >
-                            <p:commandButton value="Ver detalle" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right"  action="#{inicioBean.irADetalle(producto.codigo)}"/>
-                        </div>
-                    </div>
-                </p:dataViewGridItem>
-            </p:dataView>
 
-        </h:form>
+        <p>#{detalleProductoBean.producto}</p>
+
+        <p:panel header="Comentario">
+            <p:dataList id="lista-c" value="#{detalleProductoBean.comentarios}" emptyMessage="No Hay Comentarios">
+
+            </p:dataList>
+        </p:panel>
+
+        <p:panel header="Hacer un comentario" styleClass="mt-3" >
+
+            <h:form id="crear-comentario">
+                <h:panelGrid columns="2" cellpadding="3">
+                    <p:inputTextarea value="#{detalleProductoBean.nuevoComentario.mensaje}"
+                                     required="true" styleClass="comentario-usuario" />
+                    <p:rating value="#{detalleProductoBean.nuevoComentario.calificacion}"
+                              required="true"/>
+                </h:panelGrid>
+                <p:commandButton value="Comentar" icon="pi pi-comment" iconPos="left" update="@form,
+lista-c" styleClass="mt-4" action="#{detalleProductoBean.crearComentario}" />
+                <p:growl for="msj-pregunta" showDetail="true" />
+            </h:form>
+        </p:panel>
     </div>
 </h:body>
 </html>
