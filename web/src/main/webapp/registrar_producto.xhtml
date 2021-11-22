@@ -13,7 +13,7 @@
     <title>Publicar Producto</title>
 </h:head>
 <h:body>
-    <p:panel header="Publicar Producto" >
+    <p:panel header="Registrar Nuevo Producto" >
         <h:form>
             <h:panelGrid columns="2" cellpadding="7" >
 
@@ -24,24 +24,26 @@
                 <p:inputText id="nombre_publicacion" value="#{productoBean.producto.nombrePublicacion}" required="true" />
 
                 <p:outputLabel value="Unidades:" for="unidades" />
-                <p:inputText id="unidades" value="#{productoBean.producto.unidades}" required="true" />
-
-                <p:outputLabel value="Descripción:" for="descripcion" required="true" />
-                <p:inputText id="descripcion" value="#{productoBean.producto.descripcion}" required="true" />
+                <p:inputText id="unidades" value="#{productoBean.producto.unidades}" required="true" type="number"/>
 
                 <p:outputLabel value="Descuento:" for="descuento" />
-                <p:inputText id="descuento" value="#{productoBean.producto.descuento}" required="true" />
+                <p:inputText id="descuento" value="#{productoBean.producto.descuento}" required="true" type="number"/>
 
                 <p:outputLabel value="Precio:" for="precio" />
-                <p:inputText id="precio" value="#{productoBean.producto.precio}" required="true" />
+                <p:inputText id="precio" value="#{productoBean.producto.precio}" required="true" type="number"/>
 
                 <h:outputText value="Fecha Limíte:" for="fecha_limite" />
-                <p:calendar id="fecha_limite" value="#{productoBean.producto.fecha_limite}" pattern="yyyy/MM/dd HH:mm:ss" required="true" />
+                <p:calendar id="fecha_limite" value="#{productoBean.producto.fecha_limite}" pattern="yyyy/MM/dd HH:mm:ss" required="true"/>
 
+                <p:outputLabel value="Imagenes:" for="imagen_producto" />
+                <p:fileUpload id="imagen_producto" listener="#{productoBean.subirImagenes}" mode="advanced" multiple="true" sizeLimit="1000000" fileLimit="5" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
+
+                <p:outputLabel value="Descripción:" for="descripcion" required="true" />
+                <p:textEditor id="descripcion" value="#{productoBean.producto.descripcion}" height="250" secure="false"/>
 
             </h:panelGrid>
             <p:growl showDetail="true" />
-            <p:commandButton value="Publicar Producto" action="#{productoBean.publicarProducto}" update="@form" icon="pi pi-plus"/>
+            <p:commandButton value="Registrar Producto" action="#{productoBean.publicarProducto}" update="@form" icon="pi pi-plus"/>
 
         </h:form>
     </p:panel>
