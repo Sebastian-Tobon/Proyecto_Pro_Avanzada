@@ -41,7 +41,7 @@ public class ComentarioTest {
        Producto producto = productoRepo.findById(2).orElse(null);
 
         //Creo un Comentario
-        Comentario comentario = new Comentario(111, "Hola Papá estoy en Youtube","Ok Hijo", LocalDateTime.now(), 4.5f, producto, usuario );
+        Comentario comentario = new Comentario(111, "Hola Papá estoy en Youtube","Ok Hijo", LocalDateTime.now(), 4, producto, usuario );
         //Guardo el Comentario
         Comentario comentGuardado = comentarioRepo.save(comentario);
 
@@ -57,14 +57,14 @@ public class ComentarioTest {
 
         Comentario guardado = comentarioRepo.findById(100).orElse(null);
         //modifico la calificacion
-        guardado.setCalificacion(4.2f);
+        guardado.setCalificacion(4);
 
         //guardo el Comentario
         comentarioRepo.save(guardado);
 
         Comentario comentBuscado = comentarioRepo.findById(100).orElse(null);
         //verifico lo modificado
-        Assertions.assertEquals(4.2f, comentBuscado.getCalificacion());
+        Assertions.assertEquals(4, comentBuscado.getCalificacion());
         System.out.println("--Comentario--: "+comentBuscado);
 
     }

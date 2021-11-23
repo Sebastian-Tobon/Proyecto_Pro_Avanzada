@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.bean;
 import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
+import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -20,6 +22,9 @@ public class DetalleProductoBean implements Serializable {
 
     @Autowired
     private ProductoServicio productoServicio;
+
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
     @Value("#{param['producto']}")
     private String codigoProducto;
@@ -39,10 +44,20 @@ public class DetalleProductoBean implements Serializable {
         if (codigoProducto != null && !codigoProducto.isEmpty()) {
             Integer codigo = Integer.parseInt(codigoProducto);
             producto = productoServicio.obtenerProducto(codigo);
+            this.comentarios = producto.getListaComentarios();
         }
     }
 
     public void crearComentario(){
 
+        try {
+            nuevoComentario.setProducto(producto);
+            nuevoComentario.setUsuario(usuarioServicio.obtenerUsuarioXCodigo(123));     //Cliente quemado
+            productoServicio.comentarProducto(nuevoComentario);
+            this.comentarios.add(nuevoComentario);
+            nuevoComentario = new Comentario();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

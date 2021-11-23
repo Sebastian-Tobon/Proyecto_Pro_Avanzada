@@ -1,25 +1,26 @@
 package co.edu.uniquindio.proyecto.servicios;
 
-import co.edu.uniquindio.proyecto.entidades.Categoria;
-import co.edu.uniquindio.proyecto.entidades.Compra;
-import co.edu.uniquindio.proyecto.entidades.Producto;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.excepciones.ProductoNoEncontradoException;
 import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
+import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ProductoServicioImpl implements ProductoServicio{
 
-    private final CategoriaRepo categoriaRepo;
     private final ProductoRepo productoRepo;
+    private final ComentarioRepo comentarioRepo;
+    private final CategoriaRepo categoriaRepo;
 
-    public ProductoServicioImpl(ProductoRepo productoRepo, CategoriaRepo categoriaRepo) {
+    public ProductoServicioImpl(ProductoRepo productoRepo, ComentarioRepo comentarioRepo,CategoriaRepo categoriaRepo) {
         this.productoRepo = productoRepo;
+        this.comentarioRepo = comentarioRepo;
         this.categoriaRepo = categoriaRepo;
     }
 
@@ -63,8 +64,9 @@ public class ProductoServicioImpl implements ProductoServicio{
     }
 
     @Override
-    public void comentarProducto(String mensaje, Float calificacion, Usuario usuario, Producto producto) throws Exception {
-
+    public void comentarProducto(Comentario comentario) throws Exception {
+        comentario.setFechaComentario(LocalDateTime.now());
+        comentarioRepo.save(comentario);
     }
 
     @Override

@@ -39,14 +39,14 @@ public class Comentario implements Serializable {
     private String mensaje;
 
     @Lob
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String respuesta;
 
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime fechaComentario;
 
     @Column(nullable = false)
-    private Float calificacion;
+    private Integer calificacion;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -66,7 +66,7 @@ public class Comentario implements Serializable {
      * @param producto
      * @param usuario
      */
-    public Comentario(Integer codigo, String mensaje, String respuesta, LocalDateTime fechaComentario, Float calificacion, Producto producto, Usuario usuario) {
+    public Comentario(Integer codigo, String mensaje, String respuesta, LocalDateTime fechaComentario, Integer calificacion, Producto producto, Usuario usuario) {
         this.codigo = codigo;
         this.mensaje = mensaje;
         this.respuesta = respuesta;

@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios;
 
-import co.edu.uniquindio.proyecto.entidades.Categoria;
-import co.edu.uniquindio.proyecto.entidades.Compra;
-import co.edu.uniquindio.proyecto.entidades.Producto;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.excepciones.ProductoNoEncontradoException;
 
 import java.util.List;
@@ -22,7 +19,7 @@ public interface ProductoServicio {
 
     List<Producto> listarTodosProductos();
 
-    void comentarProducto(String mensaje, Float calificacion, Usuario usuario, Producto producto) throws Exception;
+    void comentarProducto(Comentario comentario) throws Exception;
 
     void guardarProductoFavorito(Producto producto, Usuario usuario)throws Exception;
 

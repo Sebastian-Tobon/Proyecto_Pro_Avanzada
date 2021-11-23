@@ -38,7 +38,7 @@
                 </p:selectManyMenu>
 
                 <p:outputLabel value="Ciudad: " for="ciudad_producto" />
-                <p:selectOneMenu id="ciudad_producto" value="#{productoBean.producto.ciudad}">
+                <p:selectOneMenu id="ciudad_producto" value="#{productoBean.producto.ciudad}" converter="#{ciudadConverter}">
                     <f:selectItem itemLabel="Seleccione Ciudad" noSelectionOption="true" />
                     <f:selectItems value="#{productoBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}" />
                 </p:selectOneMenu>
