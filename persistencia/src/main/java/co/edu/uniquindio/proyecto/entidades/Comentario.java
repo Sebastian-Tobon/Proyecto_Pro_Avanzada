@@ -3,8 +3,12 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * En la clase Comentario se pretende guardar los comentarios que los usuarios dejaran en el producto relacionado.
@@ -36,6 +40,7 @@ public class Comentario implements Serializable {
 
     @Lob
     @Column(nullable = false)
+    @NotBlank
     private String mensaje;
 
     @Lob
@@ -45,6 +50,7 @@ public class Comentario implements Serializable {
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime fechaComentario;
 
+    @PositiveOrZero
     @Column(nullable = false)
     private Integer calificacion;
 
@@ -74,5 +80,9 @@ public class Comentario implements Serializable {
         this.calificacion = calificacion;
         this.producto = producto;
         this.usuario = usuario;
+    }
+
+    public String getFechaEstilo(){
+        return fechaComentario.format(DateTimeFormatter.ISO_DATE);
     }
 }

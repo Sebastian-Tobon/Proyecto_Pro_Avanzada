@@ -36,7 +36,7 @@ public class Subasta implements Serializable {
     private Integer codigo;
 
     @Column(nullable = false)
-    @Future
+    @Future(message = "La fecha debe estar definida en el Futuro")
     private LocalDateTime fecha_limite;
 
     @ManyToOne

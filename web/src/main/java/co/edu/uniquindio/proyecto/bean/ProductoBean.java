@@ -75,14 +75,14 @@ public class ProductoBean {
                 producto.setFecha_limite(LocalDateTime.now().plusMonths(2));
                 productoServicio.publicarProducto(producto);
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto Creado Satisfactoriamente");
-                FacesContext.getCurrentInstance().addMessage(null, msg);
+                FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
             }else {
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Es necesario subir al menos una Imagen para el Producto");
-                FacesContext.getCurrentInstance().addMessage(null, msg);
+                FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
             }
         }catch (Exception e){
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null,msg);
+            FacesContext.getCurrentInstance().addMessage("msj-bean",msg);
         }
     }
 
