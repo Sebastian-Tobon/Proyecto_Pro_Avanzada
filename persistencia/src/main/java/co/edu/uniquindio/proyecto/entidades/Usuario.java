@@ -61,7 +61,7 @@ public class Usuario extends Persona implements Serializable {
     //@ToString.Exclude
     //private List<Producto> productos;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @Column(nullable = false)
     private Map<String, String> numTelefono;
 
@@ -81,6 +81,5 @@ public class Usuario extends Persona implements Serializable {
         super(codigo, nombre, email, password);
         this.username = username;
         this.ciudad = ciudad;
-        this.numTelefono = numTelefono;
     }
 }
