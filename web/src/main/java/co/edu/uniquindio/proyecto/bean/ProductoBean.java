@@ -51,6 +51,9 @@ public class ProductoBean {
     @Value("${upload.url}")
     private String urlUploads;
 
+    @Value("#{seguridadBean.usuarioSesion}")
+    private Usuario usuarioSesion;
+
     public ProductoBean(ProductoServicio productoServicio, UsuarioServicio usuarioServicio, CiudadServicio ciudadServicio) {
         this.productoServicio = productoServicio;
         this.usuarioServicio = usuarioServicio;
@@ -67,18 +70,18 @@ public class ProductoBean {
 
     public void publicarProducto(){
         try {
-            if(!imagenes.isEmpty()) {
-                //Quemo el usuario Vendedor al producto (Eliminar cuando se implemete las sesiones)
-                Usuario usuario = usuarioServicio.obtenerUsuarioXCodigo(123);
-                producto.setVendedor(usuario);
-                producto.setListaImagenes(imagenes);
-                producto.setFecha_limite(LocalDateTime.now().plusMonths(2));
-                productoServicio.publicarProducto(producto);
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto Creado Satisfactoriamente");
-                FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
-            }else {
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Es necesario subir al menos una Imagen para el Producto");
-                FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
+            if (usuarioSesion != null) {
+                if (!imagenes.isEmpty()) {
+                    producto.setVendedor(usuarioSesion);
+                    producto.setListaImagenes(imagenes);
+                    producto.setFecha_limite(LocalDateTime.now().plusMonths(2));
+                    productoServicio.publicarProducto(producto);
+                    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto Creado Satisfactoriamente");
+                    FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
+                } else {
+                    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Es necesario subir al menos una Imagen para el Producto");
+                    FacesContext.getCurrentInstance().addMessage("msj-bean", msg);
+                }
             }
         }catch (Exception e){
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());

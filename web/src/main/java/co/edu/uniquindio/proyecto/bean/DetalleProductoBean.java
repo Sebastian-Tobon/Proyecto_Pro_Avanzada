@@ -2,8 +2,8 @@ package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.entidades.Producto;
+import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
-import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,9 +24,6 @@ public class DetalleProductoBean implements Serializable {
 
     @Autowired
     private ProductoServicio productoServicio;
-
-    @Autowired
-    private UsuarioServicio usuarioServicio;
 
     @Value("#{param['producto']}")
     private String codigoProducto;
@@ -38,6 +37,12 @@ public class DetalleProductoBean implements Serializable {
     @Getter @Setter
     private List<Comentario> comentarios;
 
+    //@Getter @Setter
+    //private List<Integer> calificacionpromedio;
+
+    @Value("#{seguridadBean.usuarioSesion}")
+    private Usuario usuarioSesion;
+
     @PostConstruct
     public  void  inicializador(){
         nuevoComentario = new Comentario();
@@ -45,19 +50,26 @@ public class DetalleProductoBean implements Serializable {
             Integer codigo = Integer.parseInt(codigoProducto);
             producto = productoServicio.obtenerProducto(codigo);
             this.comentarios = producto.getListaComentarios();
+           // Float calificacion = productoServicio.obtenerPromedioProducto(codigo);  //implementar
+           // if (calificaion != null){
+            //    this.calificacionPromedio = calificacion.inValue();            //implementar
+            //}
         }
     }
 
     public void crearComentario(){
 
         try {
-            nuevoComentario.setProducto(producto);
-            nuevoComentario.setUsuario(usuarioServicio.obtenerUsuarioXCodigo(123));     //Cliente quemado
-            productoServicio.comentarProducto(nuevoComentario);
-            this.comentarios.add(nuevoComentario);
-            nuevoComentario = new Comentario();
+            if (usuarioSesion != null) {
+                nuevoComentario.setProducto(producto);
+                nuevoComentario.setUsuario(usuarioSesion);
+                productoServicio.comentarProducto(nuevoComentario);
+                this.comentarios.add(nuevoComentario);
+                nuevoComentario = new Comentario();
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("msj-pregunta", fm);
         }
     }
 }

@@ -23,42 +23,48 @@
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                     <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
                         <span class="pi pi-shopping-cart" style="font-size: 2rem; margin-right: 10px"></span>
-                        <span class="fs-4 nav-link text_white">Unishop</span>
+                        <span class="fs-4 nav-link text-white">Unishop</span>
                     </a>
 
                     <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small" style="text-align: center">
                         <li>
-                            <a href="/" class="nav-link text_white">
+                            <a href="/" class="nav-link text-white">
                                 <i class="pi pi-home bi d-block mx-outo mb-1 icon-menu" ></i>
                                 Home
                             </a>
                         </li>
                         <li>
-                            <a href="registrar_producto.xhtml" class="nav-link text_white">
+                            <a href="/" class="nav-link text-white">
+                                <i class="pi pi-tags bi d-block mx-outo mb-1 icon-menu" ></i>
+                                Categorias
+                            </a>
+                        </li>
+                        <li jsf:rendered="#{seguridadBean.autenticado}">
+                            <a href="/usuario/registrar_producto.xhtml" class="nav-link text-white">
                                 <i class="pi pi-save bi d-block mx-outo mb-1 icon-menu"></i>
                                 Crear Producto
                             </a>
                         </li>
-                        <li>
-                            <a href="/mis-productos.xhtml" class="nav-link text_white">
+                        <li jsf:rendered="#{seguridadBean.autenticado}">
+                            <a href="/usuario/mis-productos.xhtml" class="nav-link text-white">
                                 <i class="pi pi-list bi d-block mx-outo mb-1 icon-menu"></i>
                                 Mis Productos
                             </a>
                         </li>
-                        <li>
-                            <a href="/compras_usuario.xhtml" class="nav-link text_white">
+                        <li jsf:rendered="#{seguridadBean.autenticado}">
+                            <a href="/usuario/compras_usuario.xhtml" class="nav-link text-white">
                                 <i class="pi pi-dollar bi d-block mx-outo mb-1 icon-menu"></i>
                                 Compras
                             </a>
                         </li>
-                        <li>
-                            <a href="/carrito.xhtml" class="nav-link text_white">
+                        <li jsf:rendered="#{seguridadBean.autenticado}">
+                            <a href="/usuario/carrito.xhtml" class="nav-link text-white">
                                 <i class="pi pi-shopping-cart bi d-block mx-outo mb-1 icon-menu"></i>
                                 Carrito
                             </a>
                         </li>
-                        <li>
-                            <a href="/perfil.xhtml" class="nav-link text_white">
+                        <li jsf:rendered="#{seguridadBean.autenticado}">
+                            <a href="/usuario/perfil.xhtml" class="nav-link text-white">
                                 <i class="pi pi-user bi d-block mx-outo mb-1 icon-menu"></i>
                                 Perfil
                             </a>
@@ -110,6 +116,8 @@
         <p:growl for="login-bean" showDetail="true" />
     </h:form>
 </p:dialog>
+
+<p:growl for="msj-bean" showDetail="true"/>
 
     <div id="content">
         <div class="container" >

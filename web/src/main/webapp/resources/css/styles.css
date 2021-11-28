@@ -169,6 +169,12 @@
     border: none;
 }
 
+@media only screen and (max-width: 768px) {
+    .comentario-usuario{
+        width: 100%;
+    }
+}
+
 #info-sesion{
     position: relative;
     display: inline-block;
@@ -182,10 +188,4 @@
 
 #info-sesion > h5 {
     margin-bottom: 0;
-}
-
-@media only screen and (max-width: 768px) {
-    .comentario-usuario{
-        width: 100%;
-    }
 }

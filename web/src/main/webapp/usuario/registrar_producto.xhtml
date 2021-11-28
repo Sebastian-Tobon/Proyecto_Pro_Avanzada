@@ -7,12 +7,12 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<ui:composition template="WEB-INF/template.xhtml">
+<ui:composition template="../WEB-INF/template.xhtml">
     <ui:define name="title">Registrar Producto</ui:define>
     <ui:define name="content">
         <p:panel header="Crear Nuevo Producto" >
             <h:form>
-                <h:panelGrid columns="3" cellpadding="6" >
+                <h:panelGrid columns="3" cellpadding="10" >
 
                     <p:outputLabel value="Nombre:" for="nombre_producto" />
                     <p:inputText id="nombre_producto" value="#{productoBean.producto.nombre}" required="true" />
@@ -23,7 +23,7 @@
                     <p:message for="nombre_publicacion_p" />
 
                     <p:outputLabel value="Unidades:" for="unidades_producto" />
-                    <p:inputText id="unidades" value="#{productoBean.producto.unidades}" required="true" type="number"/>
+                    <p:inputText id="unidades_producto" value="#{productoBean.producto.unidades}" required="true" type="number"/>
                     <p:message for="unidades_producto" />
 
                     <p:outputLabel value="Descuento:" for="descuento_producto" />
@@ -57,7 +57,7 @@
 
                 </h:panelGrid>
                 <p:growl showDetail="true" for="msj-bean"/>
-                <p:commandButton value="Registrar Producto" action="#{productoBean.publicarProducto}" update="@form" icon="pi pi-plus"/>
+                <p:commandButton value="Registrar Producto" action="#{productoBean.publicarProducto()}" update="@form" icon="pi pi-plus"/>
 
             </h:form>
         </p:panel>

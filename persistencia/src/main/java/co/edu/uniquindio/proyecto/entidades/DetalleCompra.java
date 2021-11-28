@@ -39,7 +39,7 @@ public class DetalleCompra implements Serializable {
 
     @Column(nullable = false)
     @Positive
-    private Double precioProducto;
+    private Float precioProducto;
 
     @ManyToOne
     private Producto producto;
@@ -55,7 +55,7 @@ public class DetalleCompra implements Serializable {
      * @param producto
      * @param compra
      */
-    public DetalleCompra(Integer codigo, Integer unidades, Double precioProducto, Producto producto, Compra compra) {
+    public DetalleCompra(Integer codigo, Integer unidades, Float precioProducto, Producto producto, Compra compra) {
         this.codigo = codigo;
         this.unidades = unidades;
         this.precioProducto = precioProducto;
