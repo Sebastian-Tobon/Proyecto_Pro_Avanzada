@@ -27,8 +27,6 @@ public interface ProductoServicio {
 
     void eliminarProductoFavorito(Producto producto, Usuario usuario)throws Exception;
 
-    void comprarProductos(Compra compra)throws Exception;
-
     List<Producto> buscarProductos(String nombreProducto, String[] filtros);
 
     List<Producto> listarProductos(Integer codigoUsuario)throws Exception;
@@ -36,6 +34,8 @@ public interface ProductoServicio {
     List<Categoria> listarCategorias();
 
     Categoria obtenerCategorias(Integer codigo) throws Exception;
+
+    Float obtenerCalificacionPromedioProducto(Integer codigo);
 
     Compra comprarProductos(Usuario usuario, ArrayList<ProductoCarrito> productos, String medioDePago) throws Exception;
 }

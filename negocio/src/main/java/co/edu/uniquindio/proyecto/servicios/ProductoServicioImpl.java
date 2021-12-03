@@ -70,8 +70,13 @@ public class ProductoServicioImpl implements ProductoServicio{
 
     @Override
     public void comentarProducto(Comentario comentario) throws Exception {
-        comentario.setFechaComentario(LocalDateTime.now());
-        comentarioRepo.save(comentario);
+        try {
+            comentario.setFechaComentario(LocalDateTime.now());
+            comentarioRepo.save(comentario);
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
     }
 
     @Override
@@ -81,11 +86,6 @@ public class ProductoServicioImpl implements ProductoServicio{
 
     @Override
     public void eliminarProductoFavorito(Producto producto, Usuario usuario) throws Exception {
-
-    }
-
-    @Override
-    public void comprarProductos(Compra compra) throws Exception {
 
     }
 
@@ -107,6 +107,11 @@ public class ProductoServicioImpl implements ProductoServicio{
     @Override
     public Categoria obtenerCategorias(Integer codigo) throws Exception {
         return categoriaRepo.findById(codigo).orElseThrow(() -> new Exception("El Id no Corresponde a ninguna Categoria"));
+    }
+
+    @Override
+    public Float obtenerCalificacionPromedioProducto(Integer codigo) {
+        return productoRepo.obtenerPromedioCalificaciones(codigo);
     }
 
     @Override

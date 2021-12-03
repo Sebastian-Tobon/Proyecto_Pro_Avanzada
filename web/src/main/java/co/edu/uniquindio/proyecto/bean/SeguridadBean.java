@@ -50,7 +50,7 @@ public class SeguridadBean implements Serializable {
     public String iniciarSesion() {
         if (!email.isEmpty() && !password.isEmpty()) {
             try {
-                usuarioServicio.iniciarSesion(email, password);
+                usuarioSesion = usuarioServicio.iniciarSesion(email, password);
                 autenticado = true;
                 return "/index?faces-redirect=true";
             }catch (Exception e){

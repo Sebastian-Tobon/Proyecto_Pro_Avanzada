@@ -56,8 +56,8 @@
                     <p:message for="descripcion_prodcuto" />
 
                 </h:panelGrid>
-                <p:growl showDetail="true" for="msj-bean"/>
-                <p:commandButton value="Registrar Producto" action="#{productoBean.publicarProducto()}" update="@form" icon="pi pi-plus"/>
+                <p:growl showDetail="true" for="mensaje-bean"/>
+                <p:commandButton value="Registrar Producto" action="#{productoBean.publicarProducto}" update="@form" icon="pi pi-plus" />
 
             </h:form>
         </p:panel>

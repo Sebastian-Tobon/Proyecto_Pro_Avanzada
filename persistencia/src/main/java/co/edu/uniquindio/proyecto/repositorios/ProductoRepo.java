@@ -75,5 +75,5 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
 
     //Escriba una consulta que retorne la calificación promedio de un producto. Hacer Test
     @Query("select avg(c.calificacion) from Producto  p join p.listaComentarios c where p.codigo = :codigo")
-    Float obtenerPromedioCalificaciones();
+    Float obtenerPromedioCalificaciones(Integer codigo);
 }

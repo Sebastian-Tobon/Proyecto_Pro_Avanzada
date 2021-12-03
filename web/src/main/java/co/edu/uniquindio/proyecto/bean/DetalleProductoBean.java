@@ -14,6 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,7 @@ import java.util.List;
 @ViewScoped
 public class DetalleProductoBean implements Serializable {
 
-    @Autowired
-    private ProductoServicio productoServicio;
+    private final ProductoServicio productoServicio;
 
     @Value("#{param['producto']}")
     private String codigoProducto;
@@ -37,23 +37,28 @@ public class DetalleProductoBean implements Serializable {
     @Getter @Setter
     private List<Comentario> comentarios;
 
-    //@Getter @Setter
-    //private List<Integer> calificacionpromedio;
+    @Getter @Setter
+    private int calificacionPromedio;
 
     @Value("#{seguridadBean.usuarioSesion}")
     private Usuario usuarioSesion;
 
+    public DetalleProductoBean(ProductoServicio productoServicio) {
+        this.productoServicio = productoServicio;
+    }
+
     @PostConstruct
     public  void  inicializador(){
         nuevoComentario = new Comentario();
+        this.calificacionPromedio = 0;
         if (codigoProducto != null && !codigoProducto.isEmpty()) {
             Integer codigo = Integer.parseInt(codigoProducto);
             producto = productoServicio.obtenerProducto(codigo);
             this.comentarios = producto.getListaComentarios();
-           // Float calificacion = productoServicio.obtenerPromedioProducto(codigo);  //implementar
-           // if (calificaion != null){
-            //    this.calificacionPromedio = calificacion.inValue();            //implementar
-            //}
+             Float calificacion = productoServicio.obtenerCalificacionPromedioProducto(codigo);  //implementar
+             if (calificacion != null){
+                this.calificacionPromedio = calificacion.intValue();            //implementar
+            }
         }
     }
 
@@ -61,15 +66,25 @@ public class DetalleProductoBean implements Serializable {
 
         try {
             if (usuarioSesion != null) {
+                addMessage("Se acciono el boton Comentar");
+
                 nuevoComentario.setProducto(producto);
                 nuevoComentario.setUsuario(usuarioSesion);
                 productoServicio.comentarProducto(nuevoComentario);
                 this.comentarios.add(nuevoComentario);
                 nuevoComentario = new Comentario();
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Comentario Realizado");
+                FacesContext.getCurrentInstance().addMessage("msj-pregunta", fm);
             }
         } catch (Exception e) {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("msj-pregunta", fm);
         }
     }
+
+    public void addMessage(String summary){
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
 }
