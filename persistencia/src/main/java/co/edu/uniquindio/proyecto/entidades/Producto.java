@@ -99,6 +99,7 @@ public class Producto implements Serializable {
     private List<DetalleCompra> listaDetallesCompra;
 
     @ManyToMany(mappedBy = "productos")
+    @ToString.Exclude
     private List<Categoria> categorias;
 
    // @ElementCollection
@@ -137,4 +138,5 @@ public class Producto implements Serializable {
         }
         return "default.jpg";
     }
+
 }

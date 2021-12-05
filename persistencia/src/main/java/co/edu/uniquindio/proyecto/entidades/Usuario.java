@@ -82,4 +82,5 @@ public class Usuario extends Persona implements Serializable {
         this.username = username;
         this.ciudad = ciudad;
     }
+
 }

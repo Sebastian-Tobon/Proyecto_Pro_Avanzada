@@ -2,10 +2,7 @@ package co.edu.uniquindio.proyecto.repositorios;
 
 import co.edu.uniquindio.proyecto.dto.ProductoValido;
 import co.edu.uniquindio.proyecto.dto.ProductosXUsuario;
-import co.edu.uniquindio.proyecto.entidades.Categoria;
-import co.edu.uniquindio.proyecto.entidades.Comentario;
-import co.edu.uniquindio.proyecto.entidades.Producto;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.entidades.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -30,7 +27,7 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
 
     Page<Producto> findAll(Pageable paginador);
 
-    @Query("select p from Producto p where :categoria member of p.categorias")
+    @Query("select p from Producto p join p.categorias c where :categoria member of c")
     List<Producto> listarProductosXCategoria(Categoria categoria);
 
     @Query("select p.vendedor.nombre from Producto p where p.codigo = :id")
@@ -76,4 +73,7 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
     //Escriba una consulta que retorne la calificación promedio de un producto. Hacer Test
     @Query("select avg(c.calificacion) from Producto  p join p.listaComentarios c where p.codigo = :codigo")
     Float obtenerPromedioCalificaciones(Integer codigo);
+
+    @Query("select lp from Usuario u join u.listaProductosVenta lp where u.codigo = :codigo")
+    List<Producto> obtenerProductosXUsuario(Integer codigo);
 }

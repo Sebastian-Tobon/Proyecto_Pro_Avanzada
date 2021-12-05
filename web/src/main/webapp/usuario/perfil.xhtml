@@ -15,20 +15,20 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                        <img src="/uploads/perfil.jpg"  alt="" />
 
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="profile-head">
                         <h5>#{seguridadBean.usuarioSesion.nombre} </h5>
-                        <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                         <ul class="nav nav-tabs" id="myTab" >
                             <li class="nav-item" >
-                                <a class="nav-link active" id="home-tab" href="#home" >About </a>
+                                <a class="nav-link active" id="home-tab" href="#home" >Mis Datos</a>
                             </li>
 
                         </ul>
+                        <a>hola</a>
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -71,6 +71,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <p>#{seguridadBean.usuarioSesion.numTelefono}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Ciudad</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>#{seguridadBean.usuarioSesion.ciudad.nombre}</p>
                                 </div>
                             </div>
                         </div>

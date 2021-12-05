@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
+import co.edu.uniquindio.proyecto.dto.ProductoFavorito;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.excepciones.ProductoNoEncontradoException;
 import co.edu.uniquindio.proyecto.repositorios.*;
@@ -16,13 +17,15 @@ import java.util.Optional;
 public class ProductoServicioImpl implements ProductoServicio{
 
     private final ProductoRepo productoRepo;
+    private final UsuarioRepo usuarioRepo;
     private final ComentarioRepo comentarioRepo;
     private final CategoriaRepo categoriaRepo;
     private final DetalleCompraRepo detalleCompraRepo;
     private final CompraRepo compraRepo;
 
-    public ProductoServicioImpl(ProductoRepo productoRepo, ComentarioRepo comentarioRepo, CategoriaRepo categoriaRepo, DetalleCompraRepo detalleCompraRepo, CompraRepo compraRepo) {
+    public ProductoServicioImpl(ProductoRepo productoRepo, UsuarioRepo usuarioRepo, ComentarioRepo comentarioRepo, CategoriaRepo categoriaRepo, DetalleCompraRepo detalleCompraRepo, CompraRepo compraRepo) {
         this.productoRepo = productoRepo;
+        this.usuarioRepo = usuarioRepo;
         this.comentarioRepo = comentarioRepo;
         this.categoriaRepo = categoriaRepo;
         this.detalleCompraRepo = detalleCompraRepo;
@@ -81,7 +84,11 @@ public class ProductoServicioImpl implements ProductoServicio{
 
     @Override
     public void guardarProductoFavorito(Producto producto, Usuario usuario) throws Exception {
-
+        try {
+            ProductoFavorito favorito = (ProductoFavorito) usuarioRepo.obtenerProductoFavoritos(usuario.getEmail());
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override
@@ -95,8 +102,8 @@ public class ProductoServicioImpl implements ProductoServicio{
     }
 
     @Override
-    public List<Producto> listarProductos(Integer codigoUsuario) throws Exception {
-        return null;
+    public List<Producto> listarProductosXUsuario(Integer codigoUsuario) throws Exception {
+        return productoRepo.obtenerProductosXUsuario(codigoUsuario);
     }
 
     @Override

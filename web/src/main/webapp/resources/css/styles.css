@@ -190,9 +190,6 @@
     margin-bottom: 0;
 }
 
-body{
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
-}
 .emp-profile{
     padding: 3%;
     margin-top: 3%;
@@ -224,7 +221,7 @@ body{
     top: 0;
 }
 .profile-head h5{
-    color: #333;
+    color: #000000;
 }
 .profile-head h6{
     color: #0062cc;
@@ -252,7 +249,7 @@ body{
     margin-bottom:5%;
 }
 .profile-head .nav-tabs .nav-link{
-    font-weight:600;
+    font-weight:500;
     border: none;
 }
 .profile-head .nav-tabs .nav-link.active{

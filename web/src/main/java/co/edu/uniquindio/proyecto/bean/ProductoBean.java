@@ -34,6 +34,9 @@ public class ProductoBean {
     @Getter @Setter
     private Producto producto;
 
+    @Getter @Setter
+    private Categoria categoria;
+
     @Setter @Getter
     private List<Categoria> categorias;
 
@@ -48,6 +51,9 @@ public class ProductoBean {
 
     private ArrayList<String> imagenes;
 
+    @Getter @Setter
+    private List<Producto> productos;
+
     @Value("${upload.url}")
     private String urlUploads;
 
@@ -61,8 +67,10 @@ public class ProductoBean {
     }
 
     @PostConstruct
-    public void inicializar(){
+    public void inicializar() throws Exception {
+        this.productos = usuarioServicio.listaFavoritos(usuarioSesion.getEmail());
         this.producto = new Producto();
+        this.categoria = new Categoria();
         this.imagenes = new ArrayList<>();
         categorias = productoServicio.listarCategorias();
         ciudades = ciudadServicio.listarCiudades();
@@ -107,5 +115,12 @@ public class ProductoBean {
             e.printStackTrace();
         }
         return null;
+    }
+    public String irACategoria(Categoria categoria){
+        return "filtrar_categorias?faces-redirect=true&amp;categoria="+categoria;
+    }
+
+    public void productoFavorito(){
+
     }
 }

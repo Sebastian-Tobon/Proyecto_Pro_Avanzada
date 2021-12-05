@@ -22,6 +22,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Categoria implements Serializable {
 
     @Id
@@ -33,6 +34,7 @@ public class Categoria implements Serializable {
     private String nombre;
 
     @ManyToMany
+    @ToString.Exclude
     private List<Producto> productos;
 
     /**
@@ -44,4 +46,5 @@ public class Categoria implements Serializable {
         this.codigo = codigo;
         this.nombre = nombre;
     }
+
 }

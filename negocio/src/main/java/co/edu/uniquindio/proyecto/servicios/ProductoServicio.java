@@ -29,7 +29,7 @@ public interface ProductoServicio {
 
     List<Producto> buscarProductos(String nombreProducto, String[] filtros);
 
-    List<Producto> listarProductos(Integer codigoUsuario)throws Exception;
+    List<Producto> listarProductosXUsuario(Integer codigoUsuario)throws Exception;
 
     List<Categoria> listarCategorias();
 

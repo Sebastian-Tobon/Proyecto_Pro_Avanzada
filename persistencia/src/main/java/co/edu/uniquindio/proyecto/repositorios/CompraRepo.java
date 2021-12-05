@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.repositorios;
 
 import co.edu.uniquindio.proyecto.dto.ProductosXUsuario;
 import co.edu.uniquindio.proyecto.entidades.Compra;
+import co.edu.uniquindio.proyecto.entidades.DetalleCompra;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -36,6 +37,10 @@ public interface CompraRepo extends JpaRepository<Compra, Integer> {
 
     //Cree una consulta que devuelva una lista de Compras y el detalle de cada compra de un cliente
     //dado su código. dto compra, detalle
-    @Query("select c, d from Compra c join c.listaDetallesCompra d where c.usuario.codigo = : codigo")
-    List<Object> obtenerComprasXUsuario(Integer codigo);
+    @Query("select  d.producto from Compra c join c.listaDetallesCompra d join d.producto p where c.usuario.codigo = : codigo")
+    List<Producto> obtenerComprasXUsuario(Integer codigo);
+
+    @Query("select ld from Usuario u join u.listaCompras lc join lc.listaDetallesCompra ld join ld.producto p where u.codigo = :codigo")
+    List<DetalleCompra> obtenerListaComprasXUsuario(Integer codigo);
+
 }
