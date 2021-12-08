@@ -14,7 +14,15 @@
     <description>Proyecto que representa la lógica de negocio y el acceso a los datos</description>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <version>1.9.3</version>
+        </dependency>
         <dependency>
             <groupId>co.edu.uniquindio</groupId>
             <artifactId>persistencia</artifactId>

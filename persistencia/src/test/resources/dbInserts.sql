@@ -13,32 +13,32 @@ insert into categoria values (104, "Ropa");
 insert into categoria values (105, "Calzado");
 
 -- Insert de Ciudad
-insert into ciudad values (1, "Armenia");
-insert into ciudad values (2, "Pereira");
-insert into ciudad values (3, "Manizales");
-insert into ciudad values (4, "Cali");
-insert into ciudad values (5, "Medellin");
+--insert into ciudad values (6, "Armenia");
+--insert into ciudad values (7, "Pereira");
+--insert into ciudad values (8, "Manizales");
+--insert into ciudad values (9, "Cali");
+--insert into ciudad values (10, "Medellin");
 
 -- Insert de Usuario
 insert into usuario values (2001, "maria@email.com", "Maria Cardenas",  "B2134","maria2021", 1);
 insert into usuario values (2002, "mario@email.com", "Mario Fuentes",  "C7896","mario45", 2);
 insert into usuario values (2003, "sol@email.com", "Sol Ramires",  "B4562","sol91", 3);
 insert into usuario values (2004, "fabian@email.com", "fabian cruz",  "C1238","fabian1889", 4);
-insert into usuario values (2005, "chaves@email.com", "Chaves alzate",  "C4662","chavesss", 5);
-insert into usuario values (2006, 'niyora6002@wii999.com', 'Angela Ramirez',  'y%NZi2HIUZ',"angel001", 1);
-insert into usuario values (2007, 'jekoxo1677@wii999.com', 'Sofia Cardona',  'MdmxC#yQHX',"sofi23", 2);
-insert into usuario values(2008, 'gexovo3160@smuvaj.com', 'Daniela Restrepo',  'TQ,c4^sz&-',"dani2002", 3);
+--insert into usuario values (2005, "chaves@email.com", "Chaves alzate",  "C4662","chavesss", 5);
+--insert into usuario values (2006, 'niyora6002@wii999.com', 'Angela Ramirez',  'y%NZi2HIUZ',"angel001", 1);
+--insert into usuario values (2007, 'jekoxo1677@wii999.com', 'Sofia Cardona',  'MdmxC#yQHX',"sofi23", 2);
+--insert into usuario values(2008, 'gexovo3160@smuvaj.com', 'Daniela Restrepo',  'TQ,c4^sz&-',"dani2002", 3);
 
 -- Insert de Producto
-insert into producto (codigo, descripcion, descuento, fecha_limite, nombre, precio, unidades, ciudad_codigo, vendedor_codigo )
-values (1, 'nailon Importado Material duradero: fabricado con tela de nailon de alta calidad y material resistente al agua que son duraderos y más resistentes al agua que la mochila de senderismo tradicional.', 0.27, '2021-12-19',
-        'Morral Camping 95Lts', 199000, 50, 1, 2001),
-       (2, 'Carpa Iglú Dome Para 4 Personas Klimber La Carpa Iglú para 4 Personas Dome Color Gris de Klimber sirve para brindar alojamiento y protección en actividades al aire libre.',
-        0.23 , '2022-03-19', 'Carpa para Camping para 4 Personas Dome Klimber Camp', 259000, 19, 2, 2002),
-       (3, 'Múltiples reguladores que permiten un fácil control del calor y el humo / Las ruedas de 8 pulgadas permiten una mayor movilidad / Con características que incluyen un estante lateral que ofrece mucho espacio para el trabajo de preparación',
-        0.15,'2022-06-08' , 'ASADOR CARBON TIPO BARRIL CHAR-BROIL', 508000, 100, 3, 2007),
-        (4, 'Todo terreno', 0.22, '2021-12-31', 'bicicleta deportiva', 2500000, 20, 4, 2004);
-
+insert into producto (codigo, descripcion, descuento, fecha_limite, nombre, nombre_publicacion, precio, unidades, ciudad_codigo, vendedor_codigo )
+values (10, 'nailon Importado Material duradero: fabricado con tela de nailon de alta calidad y material resistente al agua que son duraderos y más resistentes al agua que la mochila de senderismo tradicional.', 0.27, '2021-12-19',
+        'Morral Camping 95Lts','pro 1', 199000, 50, 1, 2001),
+       (12, 'Carpa Iglú Dome Para 4 Personas Klimber La Carpa Iglú para 4 Personas Dome Color Gris de Klimber sirve para brindar alojamiento y protección en actividades al aire libre.',
+        0.23 , '2022-03-19', 'Carpa para Camping para 4 Personas Dome Klimber Camp','pro 2', 259000, 19, 2, 2002),
+       (13, 'Múltiples reguladores que permiten un fácil control del calor y el humo / Las ruedas de 8 pulgadas permiten una mayor movilidad / Con características que incluyen un estante lateral que ofrece mucho espacio para el trabajo de preparación',
+        0.15,'2022-06-08' , 'ASADOR CARBON TIPO BARRIL CHAR-BROIL','pro 3', 508000, 100, 3, 2003),
+        (14, 'Todo terreno', 0.22, '2021-12-31', 'bicicleta deportiva','pro 4', 2500000, 20, 4, 2004);
+/*
 -- Insert de Chat
 insert into chat values (123, 2, 2001);
 insert into chat values (124, 1, 2002);
@@ -58,20 +58,19 @@ insert into usuario_num_telefono values (2005, "3225698742", "Personal");
 insert into comentario values (100, 3.8, '2021-10-19', "Muy debil la tela", "Lamentamos los inconvenientes", 1, 2002);
 insert into comentario values (101, 4.8, '2021-9-9', "Excelente producto", "Agradecemos su compra", 2, 2003);
 insert into comentario values (102, 2.5, '2021-3-29', "Mucha demora en el envio", "Lamentamos los inconvenientes en el envio del producto", 3, 2004);
-
+*/
 --Insert Categoria
-insert into categoria values (1, "Tecnologia");
-insert into categoria values (2, "Electrodomestico");
-insert into categoria values (3, "Ropa");
-insert into categoria values (4, "Accesorios");
+insert into categoria values (10, "Tecnologia");
+insert into categoria values (12, "Electrodomestico");
+insert into categoria values (13, "Ropa");
+insert into categoria values (14, "Accesorios");
 
---Insert categoria_productos
-insert into categoria_productos values (1, 2);
+--Insert categoria_productosinsert into categoria_productos values (1, 2);
 insert into categoria_productos values (2, 1);
 insert into categoria_productos values (3, 3);
 insert into categoria_productos values (4, 2);
 insert into categoria_productos values (4, 1);
-
+/*
 -- Inserts subasta
 insert into subasta
 values (201, '2021-11-05', 1),
@@ -123,3 +122,4 @@ insert into usuario_usuario_list_productos_fav
 values ('2003', 3);
 insert into usuario_usuario_list_productos_fav
 values ('2004', 2);
+*/

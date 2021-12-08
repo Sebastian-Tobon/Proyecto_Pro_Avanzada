@@ -3,9 +3,11 @@ package co.edu.uniquindio.proyecto.test;
 import co.edu.uniquindio.proyecto.dto.ProductoValido;
 import co.edu.uniquindio.proyecto.dto.ProductosXUsuario;
 import co.edu.uniquindio.proyecto.dto.UsuarioYProducto;
+import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.entidades.Ciudad;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
 import co.edu.uniquindio.proyecto.repositorios.CiudadRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
@@ -33,6 +35,9 @@ public class ProductoTest {
 
     @Autowired
     private CiudadRepo ciudadRepo;
+
+    @Autowired
+    private CategoriaRepo categoriaRepo;
 
     //Registrar Producto
     @Test
@@ -113,8 +118,8 @@ public class ProductoTest {
     @Test
     @Sql("classpath:dbInserts.sql")
     public void obtnUsuarioProdsFavsTest() {
-        List<Producto> listaProductosFavoritos = usuarioRepo.obtenerProductoFavoritos("maria@email.com");
-        Assertions.assertEquals(2, listaProductosFavoritos.size());
+  //      List<Producto> listaProductosFavoritos = usuarioRepo.obtenerProductoFavoritos("maria@email.com");
+    //    Assertions.assertEquals(2, listaProductosFavoritos.size());
 //        System.out.println(listaProductosFavoritos);
     }
 
@@ -179,5 +184,22 @@ public class ProductoTest {
         List<ProductosXUsuario> productos = productoRepo.obtenerProductosEnVenta();
         productos.forEach(System.out::println);
         Assertions.assertEquals(4,productos.size());
+    }
+    @Test
+    @Sql("classpath:dbInserts.sql")
+    public void obtenerProductosRangoPrecioTest() {
+        List<Producto> productos = productoRepo.listarProductoPrecio2(1000000);
+        productos.forEach(System.out::println);
+        Assertions.assertEquals(3,productos.size());
+    }
+    @Test
+    @Sql("classpath:dbInserts.sql")
+    public void obtenerProductosXCategoriaTest() {
+        //Categoria categoria = categoriaRepo.findById(2).orElse(null);
+        Ciudad ciudad = ciudadRepo.findById(1).orElse(null);
+        String nombre = ciudad.getNombre();
+        List<Producto> productos = productoRepo.listarProductoXCiudad(nombre);
+        productos.forEach(System.out::println);
+        Assertions.assertEquals(2,productos.size());
     }
 }

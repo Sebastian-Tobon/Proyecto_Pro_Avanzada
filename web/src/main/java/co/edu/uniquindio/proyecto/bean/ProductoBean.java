@@ -45,8 +45,6 @@ public class ProductoBean {
 
     private final ProductoServicio productoServicio;
 
-    private final UsuarioServicio usuarioServicio;
-
     private final CiudadServicio ciudadServicio;
 
     private ArrayList<String> imagenes;
@@ -60,15 +58,13 @@ public class ProductoBean {
     @Value("#{seguridadBean.usuarioSesion}")
     private Usuario usuarioSesion;
 
-    public ProductoBean(ProductoServicio productoServicio, UsuarioServicio usuarioServicio, CiudadServicio ciudadServicio) {
+    public ProductoBean(ProductoServicio productoServicio,  CiudadServicio ciudadServicio) {
         this.productoServicio = productoServicio;
-        this.usuarioServicio = usuarioServicio;
         this.ciudadServicio = ciudadServicio;
     }
 
     @PostConstruct
     public void inicializar() throws Exception {
-        this.productos = usuarioServicio.listaFavoritos(usuarioSesion.getEmail());
         this.producto = new Producto();
         this.categoria = new Categoria();
         this.imagenes = new ArrayList<>();

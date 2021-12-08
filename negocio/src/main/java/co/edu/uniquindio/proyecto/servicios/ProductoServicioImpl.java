@@ -42,8 +42,12 @@ public class ProductoServicioImpl implements ProductoServicio{
     }
 
     @Override
-    public void actualizarProducto(Producto p) throws Exception {
-
+    public Producto actualizarProducto(Producto p) throws Exception {
+        Optional<Producto> buscado = productoRepo.findById(p.getCodigo());
+        if (buscado.isEmpty()){
+            throw  new Exception("El Producto no Existe");
+        }
+        return productoRepo.save(p);
     }
 
     @Override
@@ -59,6 +63,15 @@ public class ProductoServicioImpl implements ProductoServicio{
     @Override
     public Producto obtenerProducto(Integer codigo) throws ProductoNoEncontradoException {
         return productoRepo.findById(codigo).orElseThrow(() -> new ProductoNoEncontradoException("El codigo del producto no es Valido"));
+    }
+
+    @Override
+    public Producto obtenerProductoXCodigo(Integer codigo) throws Exception {
+        Optional<Producto> buscado = productoRepo.findById(codigo);
+        if (buscado.isEmpty()){
+            throw  new Exception("El Producto no Existe");
+        }
+        return buscado.get();
     }
 
     @Override
@@ -85,14 +98,27 @@ public class ProductoServicioImpl implements ProductoServicio{
     @Override
     public void guardarProductoFavorito(Producto producto, Usuario usuario) throws Exception {
         try {
-            ProductoFavorito favorito = (ProductoFavorito) usuarioRepo.obtenerProductoFavoritos(usuario.getEmail());
+            Optional<Producto> proBuscado = productoRepo.findById(producto.getCodigo());
+            Optional<Usuario> usuBuscado = usuarioRepo.findById(usuario.getCodigo());
+            // ProductoFavorito favorito = (ProductoFavorito) usuarioRepo.obtenerProductoFavoritos(usuario.getCodigo());
+            if (proBuscado.isEmpty() || usuBuscado.isEmpty()) {
+                throw new Exception("El Producto ó Usuario no existe");
+            }
+            ProductoFavorito pf = new ProductoFavorito(producto, usuario);
+            pf.setProducto(producto);
+            pf.setUsuario(usuario);
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
+
     }
 
     @Override
     public void eliminarProductoFavorito(Producto producto, Usuario usuario) throws Exception {
+        Optional<Producto> buscado = productoRepo.findById(producto.getCodigo());
+        if (buscado.isEmpty()){
+            throw new Exception("El código del producto no existe");
+        }
 
     }
 
@@ -146,4 +172,21 @@ public class ProductoServicioImpl implements ProductoServicio{
             throw  new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public List<Producto> obtenerProductoXPrecio(Integer precio, Integer precio2){
+        return productoRepo.listarProductoPrecio(precio, precio2);
+    }
+
+    @Override
+    public List<Producto> obtenerProductoXPrecio2(Integer precio) {
+        return productoRepo.listarProductoPrecio2(precio);
+    }
+
+    @Override
+    public List<Producto> obtenerProductoXUbicacion(String ciudad) {
+        return productoRepo.listarProductoXCiudad(ciudad);
+    }
+
+
 }

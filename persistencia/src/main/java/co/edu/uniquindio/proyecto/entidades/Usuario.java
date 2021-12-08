@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -43,18 +44,22 @@ public class Usuario extends Persona implements Serializable {
 
     @OneToMany(mappedBy = "usuario_comprador")
     @ToString.Exclude
+    @JsonIgnore
     private List<Chat> listaChats;
 
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
+    @JsonIgnore
     private List<Comentario> listaComentarios;
 
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
+    @JsonIgnore
     private List<Compra> listaCompras;
 
     @OneToMany(mappedBy = "vendedor")       //modificado
     @ToString.Exclude
+    @JsonIgnore
     private List<Producto> listaProductosVenta;     //modificado
 
     //@ManyToMany(mappedBy = "usuarios")
@@ -63,10 +68,11 @@ public class Usuario extends Persona implements Serializable {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Column(nullable = false)
-    private Map<String, String> numTelefono;
+    private List<String> numTelefono;
 
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
+    @JsonIgnore
     private List<DetalleSubasta> listaDetalleSubasta;       //nuevo
 
     @Column(nullable = false, unique = true)
@@ -75,6 +81,7 @@ public class Usuario extends Persona implements Serializable {
     //productos Favoritos
     @ManyToMany
     @ToString.Exclude
+    @JsonIgnore
     private List<Producto> usuarioListProductosFav;      //nuevo
 
     public Usuario(Integer codigo, String nombre, String email, String password, String username, Ciudad ciudad) {

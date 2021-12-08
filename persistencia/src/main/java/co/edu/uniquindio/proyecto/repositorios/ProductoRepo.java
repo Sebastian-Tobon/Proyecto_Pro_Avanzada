@@ -27,7 +27,7 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
 
     Page<Producto> findAll(Pageable paginador);
 
-    @Query("select p from Producto p join p.categorias c where :categoria member of c")
+    @Query("select distinct (p) from Producto p join p.categorias c where :categoria member of p.categorias")
     List<Producto> listarProductosXCategoria(Categoria categoria);
 
     @Query("select p.vendedor.nombre from Producto p where p.codigo = :id")
@@ -76,4 +76,14 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
 
     @Query("select lp from Usuario u join u.listaProductosVenta lp where u.codigo = :codigo")
     List<Producto> obtenerProductosXUsuario(Integer codigo);
+
+    //obtener una lista de productos que estan entre un rango de precio
+    @Query("select p from Producto p where p.precio between :precio and :precio2")
+    List<Producto> listarProductoPrecio(Integer precio, Integer precio2);
+
+    @Query("select p from Producto p where p.precio >= :precio ")
+    List<Producto> listarProductoPrecio2(Integer precio);
+
+    @Query("select p from Producto p join p.ciudad c where  p.ciudad.nombre = :ciudad")
+    List<Producto> listarProductoXCiudad(String ciudad);
 }
