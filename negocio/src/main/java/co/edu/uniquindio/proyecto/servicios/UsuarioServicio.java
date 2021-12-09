@@ -21,4 +21,8 @@ public interface UsuarioServicio {
     Usuario obtenerUsuarioXCodigo(Integer codigo) throws Exception;
 
     Usuario iniciarSesion(String email, String password) throws Exception;
+
+    void cambiarPassword(String email,String passwordN) throws Exception;
+
+    Usuario obtenerPersonaEmail(String email) throws Exception;
 }

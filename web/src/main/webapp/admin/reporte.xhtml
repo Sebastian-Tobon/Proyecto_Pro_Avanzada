@@ -9,19 +9,28 @@
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <ui:composition template="../WEB-INF/template.xhtml">
-<ui:define name="title">Mis Productos</ui:define>
-<ui:define name="content">
+    <ui:define name="title">Reporte</ui:define>
+    <ui:define name="content">
 
-    <h3>Reporte para Admins</h3>
+        <h3>Reporte</h3>
+        <div class="box">
+            <h:form>
+                <p:commandButton value="Graficar" action="#{productoBean.listar}" update="panel"/>
 
-    <h:form>
-        <p:commandButton value="Graficar" action="#{productoBean.listar}" update="panel"/>
+                <h:panelGroup id="panel" layout="block" >
+                    <p:chart type="pie" model="#{productoBean.pieChartModel}" style="width: 100%;height:500px"/>
+                </h:panelGroup>
+            </h:form>
+        </div>
+        <div class="box">
+        <h:form>
+            <p:commandButton value="Graficar" action="#{productoBean.listar2}" update="panel2"/>
 
-        <h:panelGroup id="panel" layout="block" >
-            <p:chart type="pie" model="#{productoBean.pieChartModel}" style="width:400px;height:300px"/>
-        </h:panelGroup>
-    </h:form>
-
+            <h:panelGroup id="panel2" layout="block" >
+                <p:chart type="pie" model="#{productoBean.pieChartModel}" style="width:100%;height:500px"/>
+            </h:panelGroup>
+        </h:form>
+    </div>
 </ui:define>
 </ui:composition>
-</html>
+        </html>

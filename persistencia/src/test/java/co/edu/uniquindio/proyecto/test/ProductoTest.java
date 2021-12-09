@@ -198,8 +198,8 @@ public class ProductoTest {
         //Categoria categoria = categoriaRepo.findById(2).orElse(null);
        // Ciudad ciudad = ciudadRepo.findById(1).orElse(null);
         //String nombre = ciudad.getNombre();
-       // List<Producto> productos = productoRepo.listarProductoXMes(2);
-       // productos.forEach(System.out::println);
-       // Assertions.assertEquals(4,productos.size());
+        //List<Producto> productos = productoRepo.listarCategoriaProducto();
+       //productos.forEach(System.out::println);
+        //Assertions.assertEquals(4,productos.size());
     }
 }

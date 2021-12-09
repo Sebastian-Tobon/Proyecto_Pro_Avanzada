@@ -107,4 +107,27 @@ public class UsuarioServicioImpl implements  UsuarioServicio{
         //}
     }
 
+    @Override
+    public void cambiarPassword(String email, String passwordN) throws Exception {
+        Usuario personaEncontrada = obtenerPersonaEmail(email);
+
+        if (personaEncontrada!=null){
+            personaEncontrada.setPassword(passwordN);
+            usuarioRepo.save(personaEncontrada);
+        }else{
+            throw new Exception("No existe una persona con el correo");
+        }
+    }
+
+    @Override
+    public Usuario obtenerPersonaEmail(String email) throws Exception {
+        Optional<Usuario> personaEncontrada = usuarioRepo.findByEmail(email);
+
+        if(personaEncontrada.isEmpty()){
+
+            throw new Exception("No existe un usuario con el correo");
+        }
+        return personaEncontrada.get();
+    }
+
 }

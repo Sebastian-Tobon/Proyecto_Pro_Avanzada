@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.PieChartModel;
 import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,6 +35,9 @@ public class ProductoBean {
 
     @Getter @Setter
     private PieChartModel pieChartModel;
+
+    @Getter @Setter
+    private BarChartModel barChartModel;
 
     @Getter @Setter
     private Producto producto;
@@ -121,22 +125,40 @@ public class ProductoBean {
         return null;
     }
 
-    public void graficar(List<Producto> lista){
+    public void graficarProAndPrecio(List<Producto> lista){
         pieChartModel = new PieChartModel();
 
         for (Producto prod : lista){
             pieChartModel.set(prod.getNombre(), prod.getPrecio());
         }
-        pieChartModel.setTitle("Precio");
+        pieChartModel.setTitle("Precio de Productos");
         pieChartModel.setLegendPosition("e");
         pieChartModel.setFill(false);
         pieChartModel.setShowDataLabels(true);
-        pieChartModel.setDiameter(150);
+        pieChartModel.setDiameter(400);
+    }
+
+    public void graficarProAndCantidad(List<Producto> lista2){
+        pieChartModel = new PieChartModel();
+
+        for (Producto prod : lista2){
+            pieChartModel.set(prod.getNombre(), prod.getUnidades());
+        }
+        pieChartModel.setTitle("Productos en Stock");
+        pieChartModel.setLegendPosition("e");
+        pieChartModel.setFill(false);
+        pieChartModel.setShowDataLabels(true);
+        pieChartModel.setDiameter(400);
     }
 
     public void listar(){
         productoGrafico = productoServicio.listarTodosProductos();
-        graficar(productoGrafico);
+        graficarProAndPrecio(productoGrafico);
+    }
+
+    public void listar2(){
+        productoGrafico = productoServicio.listarTodosProductos();
+        graficarProAndCantidad(productoGrafico);
     }
 
     public String irACategoria(Categoria categoria){

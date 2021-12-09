@@ -92,4 +92,5 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
 
     @Query("select p from Producto p join p.listaComentarios lc where lc.calificacion >= :calicacion")
     List<Producto> listarProductoCalficacion(Integer calicacion);
+
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +42,20 @@ public class SeguridadBean implements Serializable {
     private  Float subtotal;
 
     @Setter @Getter
-    private  Float total;
-
-    @Setter @Getter
     private Usuario usuarioSesion;
+
+    @Getter @Setter
+    private Usuario usuarioAux;
 
     @Setter @Getter
     private Administrador adminSesion;
+
+    @Getter @Setter
+    @NotBlank
+    private String emailR;
+
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     @Autowired
     private UsuarioServicio usuarioServicio;
@@ -59,14 +67,10 @@ public class SeguridadBean implements Serializable {
     private ProductoServicio productoServicio;
 
     @Autowired
-    private EmailSenderService emailSenderService;
-
-    @Autowired
     private CompraServicio compraServicio;
 
     @PostConstruct
     public void inicializar(){
-        this.total = 0F;
         this.subtotal = 0F;
         this.productoCarrito = new ArrayList<>();
     }
@@ -123,9 +127,7 @@ public class SeguridadBean implements Serializable {
             try {   //Verificar que el producto tenga las cantidades que se van a comprar
                 productoServicio.comprarProductos(usuarioSesion, productoCarrito, "PSE");       //Modificar desde el front
                 productoCarrito.clear();
-                total = subtotal;
                 subtotal = 0F;
-                triggerMail();
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Compra Realizada Satisfactoriamente");
                 FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
             }catch (Exception e){
@@ -135,26 +137,6 @@ public class SeguridadBean implements Serializable {
         }
     }
 
-    public void triggerMail() throws Exception {
-
-        String mensaje = "<h1>UNISHOP</h1>";
-
-        mensaje += "<h2>Hola, " + usuarioSesion.getNombre() + "</h2>"
-                + "\n\nTu pedido ha sido Confirmado.\n"
-                + "\n<h4>TUS COMPRAS</h4>"
-                + "<P>" + misProductos() + "</P>"
-                + "<h3>Total</h3> "
-                + "<P>" + total + "</P>"
-                + "<h3>Gracias por Elegirnos</h3> "
-                + "</h2></br></br>Atentamente, "
-                + "<h3> UNISHOP</h3>";
-        try {
-            emailSenderService.sendSimpleEmail("sebas.tobon1097@gmail.com", mensaje,
-                    "Unishop");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
    public String misProductos(){
         Integer usuarioCodigo = usuarioSesion.getCodigo();
@@ -169,5 +151,62 @@ public class SeguridadBean implements Serializable {
        return null;
    }
 
+   //recuperar contraseña
+   public void sendMail()
+   {
+       String subject = "Recuperacion de contraseña";
+       String url = "http://localhost:8080/recuperarContrasena.xhtml";
+       String message = "Un saludo por parte de unishop!" + "\n" + " Para recuperar su contraseña, de click en el siguiente enlace: " + "\n" + url;
+
+       emailSenderService.sendMail("sebas.tobon1097@gmail.com", usuarioAux.getEmail(),subject,message);
+   }
+
+    //Método para cambiar clave
+
+    public void cambiarPassword(){
+
+        try {
+            if (!password.isEmpty()){
+
+                usuarioServicio.cambiarPassword(email,password);
+
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "La contraseña se actualizo con exito");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+            }else{
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No se pudo actualizar la contraseña");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+            }
+
+        }catch (Exception e){
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+        }
+
+    }
+
+    public String buscarPorEmail(){
+
+        try {
+            usuarioAux = usuarioServicio.obtenerPersonaEmail(emailR);
+
+            if(usuarioAux!=null){
+
+                sendMail();
+            }else{
+
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "El email que ingreso no se encuentra registrado");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+            }
+
+            return "/index?faces-redirect=true";
+
+        }catch (Exception e){
+
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+        }
+        return null;
+    }
 
 }
