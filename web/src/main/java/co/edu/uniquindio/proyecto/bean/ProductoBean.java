@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.chart.PieChartModel;
 import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -30,6 +31,9 @@ import java.util.List;
 @Component
 @ViewScoped
 public class ProductoBean {
+
+    @Getter @Setter
+    private PieChartModel pieChartModel;
 
     @Getter @Setter
     private Producto producto;
@@ -52,6 +56,9 @@ public class ProductoBean {
     @Getter @Setter
     private List<Producto> productos;
 
+    @Getter @Setter
+    private List<Producto> productoGrafico;
+
     @Value("${upload.url}")
     private String urlUploads;
 
@@ -65,6 +72,7 @@ public class ProductoBean {
 
     @PostConstruct
     public void inicializar() throws Exception {
+        this.pieChartModel = new PieChartModel();
         this.producto = new Producto();
         this.categoria = new Categoria();
         this.imagenes = new ArrayList<>();
@@ -112,6 +120,25 @@ public class ProductoBean {
         }
         return null;
     }
+
+    public void graficar(List<Producto> lista){
+        pieChartModel = new PieChartModel();
+
+        for (Producto prod : lista){
+            pieChartModel.set(prod.getNombre(), prod.getPrecio());
+        }
+        pieChartModel.setTitle("Precio");
+        pieChartModel.setLegendPosition("e");
+        pieChartModel.setFill(false);
+        pieChartModel.setShowDataLabels(true);
+        pieChartModel.setDiameter(150);
+    }
+
+    public void listar(){
+        productoGrafico = productoServicio.listarTodosProductos();
+        graficar(productoGrafico);
+    }
+
     public String irACategoria(Categoria categoria){
         return "filtrar_categorias?faces-redirect=true&amp;categoria="+categoria;
     }

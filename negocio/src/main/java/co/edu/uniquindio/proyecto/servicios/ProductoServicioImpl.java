@@ -188,5 +188,15 @@ public class ProductoServicioImpl implements ProductoServicio{
         return productoRepo.listarProductoXCiudad(ciudad);
     }
 
+    @Override
+    public List<Producto> listarProductosXNameCategoria(String categoria) {
+        return productoRepo.listarProductosXCategoria2(categoria);
+    }
+
+    @Override
+    public List<Producto> listaProductoXcalificacion(Integer puntaje) {
+        return productoRepo.listarProductoCalficacion(puntaje);
+    }
+
 
 }

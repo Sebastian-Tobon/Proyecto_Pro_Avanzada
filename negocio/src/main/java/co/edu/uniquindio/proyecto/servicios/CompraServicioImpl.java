@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.DetalleCompra;
+import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,14 @@ public class CompraServicioImpl implements CompraServicio{
         return compraRepo.obtenerListaComprasXUsuario(codigo);
     }
 
+    @Override
+    public Long totalPrecioCompra(Integer codigo) {
+        return compraRepo.calcularTotalCompras(codigo);
+    }
+
+    @Override
+    public List<Producto> listaProductoComprado2(Integer codigo) throws Exception {
+        return compraRepo.obtenerComprasXUsuario(codigo);
+    }
 
 }

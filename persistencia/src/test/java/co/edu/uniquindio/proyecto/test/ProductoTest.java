@@ -196,10 +196,10 @@ public class ProductoTest {
     @Sql("classpath:dbInserts.sql")
     public void obtenerProductosXCategoriaTest() {
         //Categoria categoria = categoriaRepo.findById(2).orElse(null);
-        Ciudad ciudad = ciudadRepo.findById(1).orElse(null);
-        String nombre = ciudad.getNombre();
-        List<Producto> productos = productoRepo.listarProductoXCiudad(nombre);
-        productos.forEach(System.out::println);
-        Assertions.assertEquals(2,productos.size());
+       // Ciudad ciudad = ciudadRepo.findById(1).orElse(null);
+        //String nombre = ciudad.getNombre();
+       // List<Producto> productos = productoRepo.listarProductoXMes(2);
+       // productos.forEach(System.out::println);
+       // Assertions.assertEquals(4,productos.size());
     }
 }

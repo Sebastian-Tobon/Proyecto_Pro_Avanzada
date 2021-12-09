@@ -44,8 +44,16 @@
                                     <h:outputText value="Unidades:" />
                                     <h:outputText value="#{deta_producto.unidades}" />
                                     <h:outputText value="Precio Total:" />
-                                    <h:outputText value="$#{deta_producto.producto.precio * deta_producto.unidades}" />
+                                    <h:outputText id="total" value="$#{deta_producto.producto.precio * deta_producto.unidades}" />
                                 </h:panelGrid>
+                            </p:outputPanel>
+                        </div>
+                        <div class="col-lg-8 col-md-1 align-self-center" >
+                            <p:outputPanel>
+                            <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputText value="Total: " />
+                            <h:outputText value="#{total} " />
+                            </h:panelGrid>
                             </p:outputPanel>
                         </div>
                     </div>

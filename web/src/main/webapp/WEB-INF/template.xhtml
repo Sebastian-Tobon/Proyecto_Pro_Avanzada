@@ -71,9 +71,15 @@
                             </a>
                         </li>
                         <li jsf:rendered="#{seguridadBean.autenticado}">
-                            <a href="/usuario/perfil.xhtml" class="nav-link text-white">
-                                <i class="pi pi-user bi d-block mx-outo mb-1 icon-menu"></i>
-                                Perfil
+                            <a href="/usuario/carrito.xhtml" class="nav-link text-white">
+                                <i class="pi pi-shopping-cart bi d-block mx-outo mb-1 icon-menu"></i>
+                                Carrito
+                            </a>
+                        </li>
+                        <li jsf:rendered="#{seguridadBean.autenticadoAdmin}">
+                            <a href="/admin/reporte.xhtml" class="nav-link text-white">
+                                <i class="pi pi-user-plus bi d-block mx-outo mb-1 icon-menu"></i>
+                                Reporte
                             </a>
                         </li>
 

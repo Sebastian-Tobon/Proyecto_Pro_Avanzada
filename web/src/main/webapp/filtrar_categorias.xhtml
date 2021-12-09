@@ -13,7 +13,7 @@
 
         <h3>Categorias Filtro</h3>
 
-        <h2>#{categoriaBean.productos}</h2>
+       <h2>#{categoriaBean.productos}</h2>
 
         <div class="card">
             <h:form>
@@ -23,17 +23,24 @@
                     <h:panelGrid columns="1" cellpadding="5">
 
                         <p:outputLabel for="cat" value="Categorias: "/>
-                        <p:selectOneMenu id="cat" value="#{productoBean.producto.categorias}" style="width:200px">
+                        <p:selectOneMenu id="cat" value="#{productoBean.producto.categorias}" var="categoria" style="width:200px" converter="#{categoriaConverter}">
                             <f:selectItem itemLabel="Seleccione Categoria"  noSelectionOption="true"/>
-                            <f:selectItems value="#{productoBean.categorias}" var="categoria" itemLabel="#{categoria.nombre}"/>
+                            <f:selectItems value="#{productoBean.categorias}"  itemLabel="#{categoria.nombre}"/>
                         </p:selectOneMenu>
                     </h:panelGrid>
 
                     <p:divider />
 
                     <div class="col-lg-2 col-md-1 align-self-center" >
-                        <p:commandButton value="Ver Categoria" update="msgs" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right"  action="#{productoBean.irACategoria(categoria.codigo)}"/>
+                        <p:commandButton value="Ver Categoria" update="msgs" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right"  action="#{productoBean.irACategoria(categoria)}"/>
                     </div>
+                    <div class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto class=input-search ui-inputgroup">
+                        <h:form>
+                            <p:inputText style="width:250px" placeholder="¿Qué Producto está buscando?" required="true" value="#{productoBean.producto.categorias}" id="cate"/>
+                            <p:commandButton value="Ver Categoria" update="@form" styleClass="ui-button-raised" icon="pi pi-arrow-right" iconPos="right" action="#{productoBean.irACategoria(cate)}" />
+                        </h:form>
+                    </div>
+
                 </p:panel>
             </h:form>
         </div>

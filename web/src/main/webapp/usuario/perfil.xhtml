@@ -32,7 +32,9 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                    <h:form>
+                        <p:commandButton value="Enviar" styleClass="btn btn-primary" action="#{seguridadBean.triggerMail}" />
+                    </h:form>
                 </div>
             </div>
             <div class="row">

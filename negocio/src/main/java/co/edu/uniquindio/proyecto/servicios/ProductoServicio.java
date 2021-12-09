@@ -20,6 +20,7 @@ public interface ProductoServicio {
 
     List<Producto> listarProductos(Categoria categoria);
 
+
     List<Producto> listarTodosProductos();
 
     void comentarProducto(Comentario comentario) throws Exception;
@@ -45,4 +46,8 @@ public interface ProductoServicio {
     List<Producto> obtenerProductoXPrecio2(Integer precio);
 
     List<Producto> obtenerProductoXUbicacion(String ciudad);
+
+    List<Producto> listarProductosXNameCategoria(String categoria);
+
+    List<Producto> listaProductoXcalificacion(Integer puntaje);
 }

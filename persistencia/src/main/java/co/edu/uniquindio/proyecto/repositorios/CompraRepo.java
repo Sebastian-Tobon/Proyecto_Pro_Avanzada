@@ -37,7 +37,7 @@ public interface CompraRepo extends JpaRepository<Compra, Integer> {
 
     //Cree una consulta que devuelva una lista de Compras y el detalle de cada compra de un cliente
     //dado su código. dto compra, detalle
-    @Query("select  d.producto from Compra c join c.listaDetallesCompra d join d.producto p where c.usuario.codigo = : codigo")
+    @Query("select p from Usuario u join u.listaCompras lc join lc.listaDetallesCompra ld join ld.producto p where u.codigo = :codigo")
     List<Producto> obtenerComprasXUsuario(Integer codigo);
 
     @Query("select ld from Usuario u join u.listaCompras lc join lc.listaDetallesCompra ld join ld.producto p where u.codigo = :codigo")

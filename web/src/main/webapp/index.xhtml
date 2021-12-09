@@ -12,7 +12,7 @@
     <ui:define name="content">
         <h1>Lista de Productos</h1>
         <h:form>
-            <p:dataView value="#{inicioBean.productos}" paginator="true" rows="5" var="producto" gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+            <p:dataView value="#{inicioBean.productos}" paginator="true" rows="15" var="producto" gridIcon="pi pi-th-large" listIcon="pi pi-bars">
                 <p:dataViewGridItem>
                     <div class="card" >
                         <img src="/uploads/#{producto.imagenPrincipal}" class="card-img-top" alt="..." />

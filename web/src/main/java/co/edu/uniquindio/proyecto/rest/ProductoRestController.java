@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.rest;
 
 import co.edu.uniquindio.proyecto.dto.Mensaje;
+import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,20 +62,28 @@ public class ProductoRestController {
         }
     }
     //listar Productos por categoria
-   /* @GetMapping
-    public List<Producto> listarProductoCat(@RequestBody Categoria categoria){
-        return productoServicio.listarProductos(categoria);
+   @GetMapping("/categoria/{cat}")
+    public ResponseEntity<?> listarProductoCat(@PathVariable("cat") String categoria){
+       // return productoServicio.listarProductos(categoria);
+       List<Producto> lista =  productoServicio.listarProductosXNameCategoria(categoria);
+       return  ResponseEntity.status(200).body(lista);
     }
-*/
-    @GetMapping("/precio/{pre}")
-    public ResponseEntity<?> listarProductoPrecio(@PathVariable("pre") Integer precio){
-        List<Producto> lista =productoServicio.obtenerProductoXPrecio2(precio);
+
+    @GetMapping("/precio/{pre1}&{pre2}")
+    public ResponseEntity<?> listarProductoPrecio(@PathVariable("pre1") Integer precio1, @PathVariable("pre2") Integer precio2 ){
+        List<Producto> lista =productoServicio.obtenerProductoXPrecio(precio1, precio2);
         return  ResponseEntity.status(200).body(lista);
     }
 
     @GetMapping("/ciudad/{ciu}")
     public ResponseEntity<?> listarProductoCiudad(@PathVariable("ciu") String ciudad){
         List<Producto> lista =productoServicio.obtenerProductoXUbicacion(ciudad);
+        return  ResponseEntity.status(200).body(lista);
+    }
+
+    @GetMapping("/calificacion/{cali}")
+    public ResponseEntity<?> listarProductoCalificacion(@PathVariable("cali") Integer puntaje){
+        List<Producto> lista =productoServicio.listaProductoXcalificacion(puntaje);
         return  ResponseEntity.status(200).body(lista);
     }
 

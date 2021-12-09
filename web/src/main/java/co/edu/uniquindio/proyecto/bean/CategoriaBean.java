@@ -21,7 +21,7 @@ import java.util.List;
 public class CategoriaBean implements Serializable {
 
     @Value("#{param['categoria']}")
-    private Categoria categoria;
+    private String categoria;
 
     @Setter @Getter
     private List<Categoria> categorias;
@@ -37,7 +37,7 @@ public class CategoriaBean implements Serializable {
     public void inicializar(){
         if (categoria != null) {
 
-            this.productos = productoServicio.listarProductos(categoria);
+            this.productos = productoServicio.listarProductosXNameCategoria(categoria);
         }
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No se encontro Categoria");
         FacesContext.getCurrentInstance().addMessage("msgs", fm);

@@ -12,6 +12,11 @@
     <ui:define name="title">#{detalleProductoBean.producto.nombre}</ui:define>
     <ui:define name="content">
 
+        <div id="fb-root"></div>
+        <script async="true" defer="true" crossorigin="anonymous"
+                src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&amp;version=v9.0&amp;appId=406506983855391&amp;autoLogAppEvents=1"
+                nonce="fwpiuAAS"></script>
+
         <div class="row">
             <div class="col-lg-7 col-md-1">
                 <div class="box box-stretched">
@@ -24,6 +29,7 @@
 
             <div class="col-lg-5 col-md-1" >
                 <div class="p-grid" >
+
                     <div class="box" >
                         <p:rating value="#{detalleProductoBean.calificacionPromedio}" readonly="true"/>
                         <h1 class="mt-4">#{detalleProductoBean.producto.nombre}</h1>
@@ -36,13 +42,50 @@
                         </h:form>
                     </div>
                     <div class="box">
-                        <p>Ciduad: #{detalleProductoBean.producto.ciudad.nombre}</p>
+                        Ciduad: <p:chip  label="#{detalleProductoBean.producto.ciudad.nombre}"/>
                     </div>
 
-                    <p:dataList emptyMessage="No Hay categorias para este Producto" styleClass="lista-carac" value="#{detalleProductoBean.producto.categorias}" var="categoria">
-                        <f:facet name="header">Categoria</f:facet>
-                        <p>#{categoria}</p>
-                    </p:dataList>
+                    <div class="box">
+                        <p:repeat value="#{detalleProductoBean.producto.categorias}" var="cat">
+                            Categorias: <p:chip label="#{cat.nombre}" />
+                        </p:repeat>
+                    </div>
+
+
+                    <script>
+                        window.twttr = (function(d, s, id){
+                            var js, fjs = d.getElementsByTagName(s)[0], t = window.twttr
+                                || {};
+                            if (d.getElementById(id))
+                                return t;
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = "https://plataform.twitter.com/widgets.js";
+                            fjs.parentNode.insertBefore(js,  fjs);
+
+                            t._e = [];
+                            t.ready =function (f) {
+                                t._e.push(f);
+                            };
+
+                            return t;
+                        }(document, "script", "twitter-wjs"));
+                    </script>
+
+                    <div class="btn-redes">
+
+                        <div class="fb-share-button"
+                             data-href="https://www.uniquindio.edu.co/"
+                             data-layout="button_count" data-size="small"></div>
+
+                        <a class="twitter-share-button"
+                           href="https://twitter.com/intent/tweet?text=Hello%20world"
+                           data-size="large"
+                           data-url="http://localhost:8080/detalle_producto.xhtml?producto=#{detalleProductoBean.producto.codigo}">
+                            Tweet</a>
+
+                    </div>
+
                 </div>
             </div>
         </div>

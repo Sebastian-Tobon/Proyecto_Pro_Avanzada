@@ -35,8 +35,8 @@ public class UsuarioServicioImpl implements  UsuarioServicio{
             throw  new Exception("El Username del Usuario ya Existe");
         }
 
-        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
-        u.setPassword(passwordEncryptor.encryptPassword(u.getPassword()));
+        //StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+       // u.setPassword(passwordEncryptor.encryptPassword(u.getPassword()));
 
         return usuarioRepo.save(u);
     }
@@ -98,13 +98,13 @@ public class UsuarioServicioImpl implements  UsuarioServicio{
 
     @Override
     public Usuario iniciarSesion(String email, String password) throws Exception {
-        Usuario usuarioGuardado = usuarioRepo.findByEmailAndPassword(email, password).orElseThrow(() -> new Exception("Los datos de Autenticación son Incorrectos"));
-        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
-        if (passwordEncryptor.checkPassword(password, usuarioGuardado.getPassword())){
-            return  usuarioGuardado;
-        }else {
-            throw new Exception("La Contraseña es Incorrecta");
-        }
+        Usuario usuarioEmail = usuarioRepo.findByEmailAndPassword(email,password).orElseThrow(() -> new Exception("El usuario no Existe"));
+        //StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+        //if (passwordEncryptor.checkPassword(password, usuarioEmail.getPassword())){
+            return  usuarioEmail;
+       // }else {
+           // throw new Exception("La Contraseña es Incorrecta");
+        //}
     }
 
 }

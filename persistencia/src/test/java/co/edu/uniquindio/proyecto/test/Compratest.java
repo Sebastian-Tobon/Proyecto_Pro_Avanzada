@@ -98,4 +98,5 @@ public class Compratest {
         System.out.println("El total de productos Comprados es : ---->"+totalproductos);
         Assertions.assertEquals(2,totalproductos);
     }
+
 }

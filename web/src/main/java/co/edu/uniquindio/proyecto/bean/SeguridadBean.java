@@ -1,9 +1,10 @@
 package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
+import co.edu.uniquindio.proyecto.entidades.Administrador;
+import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
-import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
-import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
+import co.edu.uniquindio.proyecto.servicios.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 @Scope("session")
 @Component
@@ -24,7 +26,13 @@ public class SeguridadBean implements Serializable {
     private boolean autenticado;
 
     @Setter @Getter
+    private boolean autenticadoAdmin;
+
+    @Setter @Getter
     private String email, password;
+
+    @Setter @Getter
+    private List<Producto> misPro;
 
     @Setter @Getter
     private ArrayList<ProductoCarrito> productoCarrito;
@@ -33,16 +41,32 @@ public class SeguridadBean implements Serializable {
     private  Float subtotal;
 
     @Setter @Getter
+    private  Float total;
+
+    @Setter @Getter
     private Usuario usuarioSesion;
+
+    @Setter @Getter
+    private Administrador adminSesion;
 
     @Autowired
     private UsuarioServicio usuarioServicio;
 
     @Autowired
+    private AdminServicio adminServicio;
+
+    @Autowired
     private ProductoServicio productoServicio;
+
+    @Autowired
+    private EmailSenderService emailSenderService;
+
+    @Autowired
+    private CompraServicio compraServicio;
 
     @PostConstruct
     public void inicializar(){
+        this.total = 0F;
         this.subtotal = 0F;
         this.productoCarrito = new ArrayList<>();
     }
@@ -51,10 +75,14 @@ public class SeguridadBean implements Serializable {
         if (!email.isEmpty() && !password.isEmpty()) {
             try {
                 usuarioSesion = usuarioServicio.iniciarSesion(email, password);
-                autenticado = true;
+                if (usuarioSesion.getCodigo() >= 1 && usuarioSesion.getCodigo() <= 99){
+                    autenticadoAdmin = true;
+                }else {
+                    autenticado = true;
+                }
                 return "/index?faces-redirect=true";
             }catch (Exception e){
-                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta Inicio Sesión", e.getMessage());
                 FacesContext.getCurrentInstance().addMessage("login-bean", fm);
             }
         }
@@ -95,7 +123,9 @@ public class SeguridadBean implements Serializable {
             try {   //Verificar que el producto tenga las cantidades que se van a comprar
                 productoServicio.comprarProductos(usuarioSesion, productoCarrito, "PSE");       //Modificar desde el front
                 productoCarrito.clear();
+                total = subtotal;
                 subtotal = 0F;
+                triggerMail();
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Compra Realizada Satisfactoriamente");
                 FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
             }catch (Exception e){
@@ -104,4 +134,40 @@ public class SeguridadBean implements Serializable {
             }
         }
     }
+
+    public void triggerMail() throws Exception {
+
+        String mensaje = "<h1>UNISHOP</h1>";
+
+        mensaje += "<h2>Hola, " + usuarioSesion.getNombre() + "</h2>"
+                + "\n\nTu pedido ha sido Confirmado.\n"
+                + "\n<h4>TUS COMPRAS</h4>"
+                + "<P>" + misProductos() + "</P>"
+                + "<h3>Total</h3> "
+                + "<P>" + total + "</P>"
+                + "<h3>Gracias por Elegirnos</h3> "
+                + "</h2></br></br>Atentamente, "
+                + "<h3> UNISHOP</h3>";
+        try {
+            emailSenderService.sendSimpleEmail("sebas.tobon1097@gmail.com", mensaje,
+                    "Unishop");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+   public String misProductos(){
+        Integer usuarioCodigo = usuarioSesion.getCodigo();
+        try {
+            misPro = compraServicio.listaProductoComprado2(usuarioCodigo);
+            for (Producto pro: misPro){
+                return pro.toString();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       return null;
+   }
+
+
 }

@@ -47,6 +47,10 @@ public class DetalleCompra implements Serializable {
     @ManyToOne
     private Compra compra;
 
+   // @Column(nullable = false)
+   // @Positive
+   // private Float total;
+
     /**
      * Metodo constructor con argumentos
      * @param codigo

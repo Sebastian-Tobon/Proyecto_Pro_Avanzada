@@ -30,6 +30,9 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
     @Query("select distinct (p) from Producto p join p.categorias c where :categoria member of p.categorias")
     List<Producto> listarProductosXCategoria(Categoria categoria);
 
+    @Query("select distinct (p) from Producto p join p.categorias c where c.nombre = :categoria")
+    List<Producto> listarProductosXCategoria2(String categoria);
+
     @Query("select p.vendedor.nombre from Producto p where p.codigo = :id")
     String obtenerNombreVendedor(Integer id);
 
@@ -86,4 +89,7 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
 
     @Query("select p from Producto p join p.ciudad c where  p.ciudad.nombre = :ciudad")
     List<Producto> listarProductoXCiudad(String ciudad);
+
+    @Query("select p from Producto p join p.listaComentarios lc where lc.calificacion >= :calicacion")
+    List<Producto> listarProductoCalficacion(Integer calicacion);
 }
